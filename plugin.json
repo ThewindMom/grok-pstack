@@ -1,0 +1,30 @@
+{
+  "name": "keel",
+  "version": "0.1.0",
+  "description": "Rigorous playbook-driven engineering for Grok Build. Port of Lauren Tan's pstack / poteto-mode playbooks and principles, with a Grok-native harness.",
+  "author": {
+    "name": "Marc"
+  },
+  "homepage": "https://github.com/jexmarc/keel",
+  "repository": "https://github.com/jexmarc/keel",
+  "license": "MIT",
+  "keywords": [
+    "keel",
+    "pstack",
+    "poteto-mode",
+    "workflow",
+    "principles",
+    "subagents",
+    "unslop"
+  ],
+  "category": "developer-tools",
+  "tags": [
+    "workflow",
+    "principles",
+    "review",
+    "planning"
+  ],
+  "skills": "./skills/",
+  "agents": "./agents/",
+  "commands": "./commands/"
+}
