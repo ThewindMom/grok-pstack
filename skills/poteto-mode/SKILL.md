@@ -1,12 +1,12 @@
 ---
-name: keel
-description: Keel's agent style for concise, detailed responses, parent-owned fan-out, unslopped prose, simple code, and verified work. Use for /keel, /keel-mode, poteto-mode, or requests to work in this style.
+name: poteto-mode
+description: poteto's agent style for concise, detailed responses, parent-owned fan-out, unslopped prose, simple code, and verified work. Use for /poteto-mode, /pstack, poteto-mode, or requests to work in this style.
 disable-model-invocation: true
-when-to-use: keel, keel-mode, poteto-mode, poteto
-reminder: New task? Playbook match or rigor needed -> apply /keel. Casual turn or user opts out -> don't.
+when-to-use: poteto-mode, pstack, poteto
+reminder: New task? Playbook match or rigor needed -> apply /poteto-mode. Casual turn or user opts out -> don't.
 ---
 
-# Keel
+# Poteto mode
 
 ## Non-negotiables
 
@@ -84,11 +84,11 @@ Read the leaf skill in full for any principle you apply. Each entry names when i
 
 ## Subagents
 
-Read `references/spawn.md` before the first spawn. Read `references/scripts.md` before running `watch-pr`, `orch`, or `worktree-audit`. Those tools live in the plugin tree, not the user's project cwd. Grok nesting depth is 1. **This session is the parent.** Every `spawn_subagent` call happens here. A `keel-agent` child cannot spawn. If a playbook says a child fans out internally, ignore that sentence and do the fan-out yourself. `/no-comments` and the babysit loop stay in this session.
+Read `references/spawn.md` before the first spawn. Read `references/scripts.md` before running `watch-pr`, `orch`, or `worktree-audit`. Those tools live in the plugin tree, not the user's project cwd. Grok nesting depth is 1. **This session is the parent.** Every `spawn_subagent` call happens here. A `poteto-agent` child cannot spawn. If a playbook says a child fans out internally, ignore that sentence and do the fan-out yourself. `/no-comments` and the babysit loop stay in this session.
 
-**Use `subagent_type: "keel-agent"` for code-writing delegates and ad-hoc helpers.** `/keel` and `keel-agent` share the same style. Routed workflow skills (`how`, `why`, `interrogate`, `reflect`, `swarm`) set their own type; respect that, don't override to `keel-agent`.
+**Use `subagent_type: "pstack:poteto-agent"` for code-writing delegates and ad-hoc helpers.** Grok qualifies plugin agents as `plugin-name:agent-name`. `/poteto-mode` and `poteto-agent` share the same style. Routed workflow skills (`how`, `why`, `interrogate`, `reflect`, `swarm`) set their own type; respect that, don't override to `pstack:poteto-agent`.
 
-**Defaults for every `spawn_subagent` call.** `background: true`, file pointers not inlined context, explicit `model` per role from `~/.grok/keel.toml` or `.grok/keel.toml` (defaults `grok-4.5` for mechanical code, `grok-4.6` for judgment and prose). Reviewers and explorers use `capability_mode: "read-only"`. Writers use `all`. Isolated writers use `isolation: "worktree"`. Hardest changes go to `grok-4.6`. Trivial mechanical edits go to `grok-4.5`. `inherit-parent` or `auto` means omit `model`.
+**Defaults for every `spawn_subagent` call.** `background: true`, file pointers not inlined context, explicit `model` per role from `~/.grok/pstack.toml` or `.grok/pstack.toml` (defaults `grok-4.5` for mechanical code, `grok-4.6` for judgment and prose). Reviewers and explorers use `capability_mode: "read-only"`. Writers use `all`. Isolated writers use `isolation: "worktree"`. Hardest changes go to `grok-4.6`. Trivial mechanical edits go to `grok-4.5`. `inherit-parent` or `auto` means omit `model`.
 
 Only `grok-4.6` and `grok-4.5`. Multi-model panels are multi-effort and multi-persona Grok children, not four vendors.
 

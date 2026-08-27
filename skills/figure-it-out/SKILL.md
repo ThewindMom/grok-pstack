@@ -12,7 +12,7 @@ Don't reinvent a playbook you already have. A focused single-unit task that matc
 
 ## Start
 
-Open a todolist whose first item is to read the Principles section of the **keel** skill and `references/spawn.md`. Then add the phases below as todos. The parent owns every fan-out. A designed playbook that tells a child to spawn children is wrong on Grok.
+Open a todolist whose first item is to read the Principles section of the **pstack** skill and `references/spawn.md`. Then add the phases below as todos. The parent owns every fan-out. A designed playbook that tells a child to spawn children is wrong on Grok.
 
 ## Phase A: Frame
 

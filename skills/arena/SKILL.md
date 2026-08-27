@@ -8,7 +8,7 @@ disable-model-invocation: true
 
 Fan out N parallel attempts at the same task. Read every candidate end to end. Pick the strongest as the base. Graft the best ideas from the others into it. Verify the synthesized result.
 
-The parent session owns every `spawn_subagent` call. See the keel skill `references/spawn.md`. Candidates are leaves. They do not spawn.
+The parent session owns every `spawn_subagent` call. See the poteto-mode skill `references/spawn.md`. Candidates are leaves. They do not spawn.
 
 ## Start
 
@@ -27,12 +27,12 @@ The N candidates will receive the same prompt, so the prompt is the contract. Ge
 
 1. State the artifact each candidate is producing.
 2. Derive the rubric. State what success looks like for *this* task, then turn it into 3-6 concrete gradeable criteria. Concrete: `Adds a --dry-run flag that skips writes`. Vague: `code is correct`. The rubric is the picker's tool in Phase D; candidates only see the task.
-3. Pick the runners from `panels.arena_runners` in `~/.grok/keel.toml` or `.grok/keel.toml` when present. Otherwise default to the four Grok slots: `grok-4.6` high/adversarial, `grok-4.6` default/quality, `grok-4.5` low/mechanical, `grok-4.6` high/architecture. Spawn more when the arena covers multiple design directions. Same model N times when the work is generation-bound rather than judgment-sensitive.
+3. Pick the runners from `panels.arena_runners` in `~/.grok/pstack.toml` or `.grok/pstack.toml` when present. Otherwise default to the four Grok slots: `grok-4.6` high/adversarial, `grok-4.6` default/quality, `grok-4.5` low/mechanical, `grok-4.6` high/architecture. Spawn more when the arena covers multiple design directions. Same model N times when the work is generation-bound rather than judgment-sensitive.
 4. Assign output paths. Each candidate writes to its own location (`isolation: worktree` where possible, otherwise `/tmp/arena-<slug>/candidate-<n>/`). N candidates writing to the same path is shared mutable state and fails the **separate-before-serializing-shared-state** principle skill test.
 
 ## Phase B: Fan out
 
-Spawn all N children in one message with `background: true`, `subagent_type: keel-agent` for code or `general-purpose` for sketches. Each gets the task, the path to the shared grounding, its own output path, and instructions to produce both the artifact and a short rationale. Put the persona in the prompt.
+Spawn all N children in one message with `background: true`, `subagent_type: pstack:poteto-agent` for code or `general-purpose` for sketches. Each gets the task, the path to the shared grounding, its own output path, and instructions to produce both the artifact and a short rationale. Put the persona in the prompt.
 
 The rationale is mandatory. Without it, the parent cannot tell whether a candidate's structure is principled or accidental, which makes Phase E grafting unreliable. Each rationale names the alternatives the candidate considered and what it rejected.
 

@@ -8,7 +8,7 @@ disable-model-invocation: true
 
 Spawn one reviewer per configured panel slot to adversarially review code changes. Each reviewer gets the same prompt and rubric. The adversarial signal comes from effort and persona diversity, not four vendors. Agreement across slots is high-confidence signal; lone-slot findings are worth reading but lower confidence.
 
-The parent session owns every `spawn_subagent` call. See the keel skill `references/spawn.md`. Reviewers are leaves.
+The parent session owns every `spawn_subagent` call. See the poteto-mode skill `references/spawn.md`. Reviewers are leaves.
 
 The deliverable is a synthesized verdict. Do NOT auto-apply changes.
 
@@ -35,7 +35,7 @@ Write one clear paragraph. Reviewers challenge whether the work achieves the int
 
 ## Step 3, Spawn Reviewers
 
-Launch all reviewers in a single message using `spawn_subagent`. Use `panels.interrogate_reviewers` from `~/.grok/keel.toml` or `.grok/keel.toml` when present, one reviewer per entry; otherwise use the table defaults.
+Launch all reviewers in a single message using `spawn_subagent`. Use `panels.interrogate_reviewers` from `~/.grok/pstack.toml` or `.grok/pstack.toml` when present, one reviewer per entry; otherwise use the table defaults.
 
 | Slot | Model | Effort | Persona |
 |---|---|---|---|

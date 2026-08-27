@@ -8,7 +8,7 @@ disable-model-invocation: true
 
 Mine the current conversation for durable learnings, then route them into skill edits.
 
-The parent session owns every `spawn_subagent` call. See the keel skill `references/spawn.md`. Reviewers are leaves.
+The parent session owns every `spawn_subagent` call. See the poteto-mode skill `references/spawn.md`. Reviewers are leaves.
 
 ## When to invoke
 

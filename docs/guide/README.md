@@ -1,13 +1,13 @@
-# The Keel guide
+# The pstack guide
 
-Keel works best when you stop micromanaging the agent. You describe what you want and how you'll know it's done. `/keel` picks the playbook, runs the other skills as the steps need them, and shows you the evidence. This guide teaches that habit with realistic prompts.
+pstack works best when you stop micromanaging the agent. You describe what you want and how you'll know it's done. `/poteto-mode` picks the playbook, runs the other skills as the steps need them, and shows you the evidence. This guide teaches that habit with realistic prompts.
 
 The playbooks and principles come from Lauren Tan's pstack. The install, spawn rules, and model mapping are Grok-native.
 
 Here's what you'll learn:
 
-1. [Set up Keel](./01-setup.md). Install the plugin and pick your models.
-2. [Route work through `/keel`](./02-keel.md). Give it a goal and watch it pick a playbook.
+1. [Set up pstack](./01-setup.md). Install the plugin and pick your models.
+2. [Route work through `/poteto-mode`](./02-pstack.md). Give it a goal and watch it pick a playbook.
 3. [Understand the code](./03-understand.md). `/how`, `/why`, `/teach`, and `/recall` before you edit anything.
 4. [Design the change](./04-design.md). `/architect`, `/arena`, `/swarm`, and `/interrogate` before code locks in a shape.
 5. [Build and clean the change](./05-build-and-clean.md). The build playbooks, `/tdd`, `/unslop`, and `/no-comments`.
@@ -24,9 +24,9 @@ Read the pages in order the first time. After that, each page stands alone.
 Give the agent a goal and a way to check it, in your own words:
 
 ```text
-/keel the export writes duplicate rows when a retry lands mid-run. repro first, then fix and verify.
+/poteto-mode the export writes duplicate rows when a retry lands mid-run. repro first, then fix and verify.
 ```
 
-You don't need to name a playbook or list skills. "repro first" and a checkable outcome are all the routing signal `/keel` needs. It matches the Bug fix playbook, copies the steps into a todo list, and calls the right skills as each step fires.
+You don't need to name a playbook or list skills. "repro first" and a checkable outcome are all the routing signal `/poteto-mode` needs. It matches the Bug fix playbook, copies the steps into a todo list, and calls the right skills as each step fires.
 
-Next: [Set up Keel](./01-setup.md).
+Next: [Set up pstack](./01-setup.md).

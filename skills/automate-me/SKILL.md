@@ -62,7 +62,7 @@ Group the combined signals into sections. Common ones (use only what applies):
 - **Process**: git worktrees, commits, PRs, review/merge tooling.
 - **Skills**: skill-authoring habits, fix-the-skill-first, proposing new skills.
 
-The **keel** skill shows the shape. Read it for granularity. Don't copy its content; the user's rules are not the same as keel's.
+The **pstack** skill shows the shape. Read it for granularity. Don't copy its content; the user's rules are not the same as pstack's.
 
 ### 4. Draft the skill
 
@@ -106,6 +106,6 @@ Run a description-optimization loop only if the skill's trigger accuracy turns o
 
 ## Reference files
 
-- The **keel** skill: example of the output shape.
+- The **pstack** skill: example of the output shape.
 - The **unslop** skill: prose discipline for every line.
 - Grok's `/create-skill`: skill authoring process and writing guidelines.

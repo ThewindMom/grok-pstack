@@ -1,19 +1,19 @@
 {
-  "name": "keel",
+  "name": "pstack",
   "version": "0.1.0",
-  "description": "Rigorous playbook-driven engineering for Grok Build. Port of Lauren Tan's pstack / poteto-mode playbooks and principles, with a Grok-native harness.",
+  "description": "if you want to go fast, go deep first. pstack helps you write less, but higher quality code. rigorous agent workflows you can parallelize with confidence. Grok Build port of Lauren Tan's poteto-mode.",
   "author": {
-    "name": "Marc"
+    "name": "Thewind"
   },
-  "homepage": "https://github.com/jexmarc/keel",
-  "repository": "https://github.com/jexmarc/keel",
+  "homepage": "https://github.com/ThewindMom/pstack",
+  "repository": "https://github.com/ThewindMom/pstack",
   "license": "MIT",
   "keywords": [
-    "keel",
     "pstack",
     "poteto-mode",
     "workflow",
     "principles",
+    "agent-style",
     "subagents",
     "unslop"
   ],

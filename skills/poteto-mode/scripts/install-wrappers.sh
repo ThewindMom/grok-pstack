@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 # Write ~/.grok/bin wrappers that point at this plugin's scripts.
-# /setup-keel runs this so playbooks can call keel-watch-pr after install.
+# /setup-pstack runs this so playbooks can call pstack-watch-pr after install.
 set -euo pipefail
 
 here=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
 if [ ! -x "$here/worktree-audit.sh" ] || [ ! -e "$here/watch-pr/watch-pr" ]; then
-	echo "install-wrappers: $here is not a keel scripts dir" >&2
+	echo "install-wrappers: $here is not a pstack scripts dir" >&2
 	exit 1
 fi
 
@@ -22,16 +22,16 @@ write_wrap() {
 	chmod +x "$bin/$name"
 }
 
-write_wrap keel-watch-pr "$here/watch-pr/watch-pr"
-write_wrap keel-worktree-audit "$here/worktree-audit.sh"
-write_wrap keel-resolve-scripts "$here/resolve-scripts.sh"
+write_wrap pstack-watch-pr "$here/watch-pr/watch-pr"
+write_wrap pstack-worktree-audit "$here/worktree-audit.sh"
+write_wrap pstack-resolve-scripts "$here/resolve-scripts.sh"
 
 {
 	echo '#!/usr/bin/env bash'
 	printf 'exec bun %q "$@"\n' "$here/orch/orch.ts"
-} > "$bin/keel-orch"
-chmod +x "$bin/keel-orch"
+} > "$bin/pstack-orch"
+chmod +x "$bin/pstack-orch"
 
-write_wrap keel-scripts "$here/resolve-scripts.sh"
+write_wrap pstack-scripts "$here/resolve-scripts.sh"
 
 printf '%s\n' "$bin"

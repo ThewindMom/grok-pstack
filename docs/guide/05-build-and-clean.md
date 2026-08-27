@@ -7,30 +7,30 @@ The build playbooks share one discipline. Say what you observed, let the playboo
 A bug prompt states the symptom and asks for a reproduction first:
 
 ```text
-/keel this command emits two records after a retry. repro first, then fix and verify.
+/poteto-mode this command emits two records after a retry. repro first, then fix and verify.
 ```
 
 A feature prompt states the behavior and what must not change:
 
 ```text
-/keel add a --json flag. text output stays byte-identical. verify both forms.
+/poteto-mode add a --json flag. text output stays byte-identical. verify both forms.
 ```
 
 A refactoring prompt pins behavior before structure moves:
 
 ```text
-/keel move parsing into one module, zero behavior change. record the current output first and prove it's unchanged after.
+/poteto-mode move parsing into one module, zero behavior change. record the current output first and prove it's unchanged after.
 ```
 
 A perf prompt states the measurement, not a vibe:
 
 ```text
-/keel startup takes 1.8s on this fixture. trace it, fix the measured cause, show me before and after.
+/poteto-mode startup takes 1.8s on this fixture. trace it, fix the measured cause, show me before and after.
 ```
 
-Each of these routes to its playbook ([Bug fix](../../skills/keel/playbooks/bug-fix.md), [Feature](../../skills/keel/playbooks/feature.md), [Refactoring](../../skills/keel/playbooks/refactoring.md), [Perf issue](../../skills/keel/playbooks/perf-issue.md)), and the playbook supplies the steps you didn't type: reproduce before fixing, name the data shape before implementing, pin behavior before restructuring, profile before optimizing.
+Each of these routes to its playbook ([Bug fix](../../skills/poteto-mode/playbooks/bug-fix.md), [Feature](../../skills/poteto-mode/playbooks/feature.md), [Refactoring](../../skills/poteto-mode/playbooks/refactoring.md), [Perf issue](../../skills/poteto-mode/playbooks/perf-issue.md)), and the playbook supplies the steps you didn't type: reproduce before fixing, name the data shape before implementing, pin behavior before restructuring, profile before optimizing.
 
-For sustained improvement of one number, there's the [Hillclimb playbook](../../skills/keel/playbooks/hillclimb.md). Give it the metric, a target, and a floor on attempts, and it loops one hypothesis at a time with a frozen measurement harness. It keeps wins and reverts everything else.
+For sustained improvement of one number, there's the [Hillclimb playbook](../../skills/poteto-mode/playbooks/hillclimb.md). Give it the metric, a target, and a floor on attempts, and it loops one hypothesis at a time with a frozen measurement harness. It keeps wins and reverts everything else.
 
 ## Write the failing test first with `/tdd`
 
@@ -48,7 +48,7 @@ In context, that's enough. [`/tdd`](../../skills/tdd/SKILL.md) writes the smalle
 
 ## Clean before you commit
 
-The [Opening a PR playbook](../../skills/keel/playbooks/opening-a-pr.md) runs `/deslop` on the diff before each commit and applies [`/unslop`](../../skills/unslop/SKILL.md) to the PR description and commit bodies. `/deslop` ships in Keel. If a session somehow lacks it, ask for the same outcome in plain words: remove narrating comments, unsupported guards, dead compatibility paths, and unrelated edits.
+The [Opening a PR playbook](../../skills/poteto-mode/playbooks/opening-a-pr.md) runs `/deslop` on the diff before each commit and applies [`/unslop`](../../skills/unslop/SKILL.md) to the PR description and commit bodies. `/deslop` ships in pstack. If a session somehow lacks it, ask for the same outcome in plain words: remove narrating comments, unsupported guards, dead compatibility paths, and unrelated edits.
 
 For prose, `/unslop` takes a target and any extra rules you have:
 

@@ -7,7 +7,7 @@ description: Strip slop from a code diff before commit. Narrating comments, unsu
 
 Clean the diff before it is committed. This is the code-side counterpart of `/unslop` (prose) and `/no-comments` (a second pair of eyes on comments).
 
-pstack called this out of `cursor-team-kit`. Keel ships it.
+pstack called this out of `cursor-team-kit`. pstack ships it.
 
 ## Scope
 

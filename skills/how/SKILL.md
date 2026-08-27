@@ -7,7 +7,7 @@ description: "Use for \"how does X work\", code walkthroughs before changing som
 
 Explore the codebase to answer "how does X work?" questions. Produce clear architectural explanations at the level of a senior engineer onboarding onto a subsystem. Enough to build a working mental model, not annotated source code.
 
-The parent session owns every `spawn_subagent` call. See the keel skill `references/spawn.md`. Children do not spawn.
+The parent session owns every `spawn_subagent` call. See the poteto-mode skill `references/spawn.md`. Children do not spawn.
 
 Two modes:
 

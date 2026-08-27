@@ -1,20 +1,20 @@
 ---
-name: setup-keel
-description: Configure which Grok models and efforts Keel uses per role. Writes ~/.grok/keel.toml or project .grok/keel.toml. Use for /setup-keel, "configure keel models", or changing Keel's model choices.
+name: setup-pstack
+description: Configure which Grok models and efforts pstack uses per role. Writes ~/.grok/pstack.toml or project .grok/pstack.toml. Use for /setup-pstack, "configure pstack models", or changing pstack's model choices.
 ---
 
-# Setup Keel
+# Setup pstack
 
-Write a Grok config that overrides Keel's per-role model and effort defaults. Skills read it and fall back to their inline defaults when a key is absent.
+Write a Grok config that overrides pstack's per-role model and effort defaults. Skills read it and fall back to their inline defaults when a key is absent.
 
-Never write `~/.cursor/rules/`. Cursor rules are not loaded as Keel config.
+Never write `~/.cursor/rules/`. Cursor rules are not loaded as pstack config.
 
 ## Where it goes
 
 Ask once, prefer `ask_user_question`:
 
-- **User** (default): `~/.grok/keel.toml` plus `~/.grok/rules/keel.md`
-- **Project**: `.grok/keel.toml` plus `.grok/rules/keel.md`
+- **User** (default): `~/.grok/pstack.toml` plus `~/.grok/rules/pstack.md`
+- **Project**: `.grok/pstack.toml` plus `.grok/rules/pstack.md`
 
 Project wins when both exist. Re-runs overwrite the chosen files so setup stays idempotent.
 
@@ -22,19 +22,19 @@ Project wins when both exist. Re-runs overwrite the chosen files so setup stays 
 
 ### 1. Detect available models
 
-The only slugs Keel will write are `grok-4.6` and `grok-4.5`. Confirm they resolve on `spawn_subagent` in this session. If a slug is rejected, do not write it.
+The only slugs pstack will write are `grok-4.6` and `grok-4.5`. Confirm they resolve on `spawn_subagent` in this session. If a slug is rejected, do not write it.
 
 `inherit-parent` and `auto` are always valid. They mean omit `model` so the child inherits the parent chat model.
 
 ### 2. Load current state
 
-If the target `keel.toml` exists, read it. Otherwise start from the defaults in step 5.
+If the target `pstack.toml` exists, read it. Otherwise start from the defaults in step 5.
 
 ### 3. Map and confirm
 
 Show every role with its current model and effort. For panel roles the value is a list. One child runs per entry, so the list length is the panel size.
 
-Keel cannot run four vendors. A panel is four Grok children that differ by model, effort, and persona:
+pstack cannot run four vendors. A panel is four Grok children that differ by model, effort, and persona:
 
 | Slot | Default model | Effort | Persona |
 |---|---|---|---|
@@ -55,18 +55,18 @@ Every real slug must be `grok-4.6` or `grok-4.5`. `inherit-parent` and `auto` al
 
 ### 5. Write the files
 
-Resolve the installed plugin's scripts directory before writing. This skill lives at `skills/setup-keel/`. The tools live at sibling `skills/keel/scripts/`. Use that absolute path when it contains `worktree-audit.sh`. Otherwise run `skills/keel/scripts/resolve-scripts.sh` from the plugin tree.
+Resolve the installed plugin's scripts directory before writing. This skill lives at `skills/setup-pstack/`. The tools live at sibling `skills/poteto-mode/scripts/`. Use that absolute path when it contains `worktree-audit.sh`. Otherwise run `skills/poteto-mode/scripts/resolve-scripts.sh` from the plugin tree.
 
-Write that path as `scripts_root` at the top of `keel.toml`. Then run `"$scripts_root/install-wrappers.sh"`. It writes `keel-watch-pr`, `keel-orch`, `keel-worktree-audit`, `keel-resolve-scripts`, and `keel-scripts` under `~/.grok/bin`. Tell the user to put `~/.grok/bin` on `PATH` if it is not already.
+Write that path as `scripts_root` at the top of `pstack.toml`. Then run `"$scripts_root/install-wrappers.sh"`. It writes `pstack-watch-pr`, `pstack-orch`, `pstack-worktree-audit`, `pstack-resolve-scripts`, and `pstack-scripts` under `~/.grok/bin`. Tell the user to put `~/.grok/bin` on `PATH` if it is not already.
 
-`keel.toml`:
+`pstack.toml`:
 
 ```toml
-# Keel per-role model and effort. Delete a key to fall back to the skill default.
+# pstack per-role model and effort. Delete a key to fall back to the skill default.
 # Models: grok-4.6, grok-4.5, inherit-parent, auto.
 
-# Absolute path to this install's skills/keel/scripts. Playbooks resolve tools through it.
-scripts_root = "/absolute/path/to/skills/keel/scripts"
+# Absolute path to this install's skills/poteto-mode/scripts. Playbooks resolve tools through it.
+scripts_root = "/absolute/path/to/skills/poteto-mode/scripts"
 
 [roles]
 "feature, refactoring" = { model = "grok-4.5" }
@@ -171,15 +171,15 @@ persona = "architecture"
 
 Also write a short always-on rule next to it so new sessions see the mapping.
 
-`~/.grok/rules/keel.md` or `.grok/rules/keel.md`:
+`~/.grok/rules/pstack.md` or `.grok/rules/pstack.md`:
 
 ```markdown
-# Keel models
+# pstack models
 
-Read `~/.grok/keel.toml` or `.grok/keel.toml` before any `spawn_subagent` call.
+Read `~/.grok/pstack.toml` or `.grok/pstack.toml` before any `spawn_subagent` call.
 Use only `grok-4.6` and `grok-4.5`. The parent session owns every fan-out.
-Children do not spawn. See the keel skill `references/spawn.md`.
-Resolve harness tools through `scripts_root` or `~/.grok/bin` (`keel-watch-pr`, `keel-orch`, `keel-worktree-audit`). See the keel skill `references/scripts.md`.
+Children do not spawn. See the poteto-mode skill `references/spawn.md`.
+Resolve harness tools through `scripts_root` or `~/.grok/bin` (`pstack-watch-pr`, `pstack-orch`, `pstack-worktree-audit`). See the poteto-mode skill `references/scripts.md`.
 ```
 
 ### 6. Confirm

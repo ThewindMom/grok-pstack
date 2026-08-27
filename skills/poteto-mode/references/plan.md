@@ -1,6 +1,6 @@
 # Plan
 
-Produce a phased implementation plan grounded in the **Principles** section of the `keel` skill. The plan is the deliverable. Do not implement.
+Produce a phased implementation plan grounded in the **Principles** section of the `poteto-mode` skill. The plan is the deliverable. Do not implement.
 
 Open a todolist with one item per step below.
 
@@ -12,7 +12,7 @@ Plan when the change spans three or more files, introduces architecture, has com
 
 ## 1. Re-read principles
 
-Read the **Principles** section of the `keel` skill end to end, and the leaf `principle-*` skills it indexes. The principles govern every plan decision; cross-link them.
+Read the **Principles** section of the `poteto-mode` skill end to end, and the leaf `principle-*` skills it indexes. The principles govern every plan decision; cross-link them.
 
 ## 2. Scope and constraints
 
@@ -24,7 +24,7 @@ Resolve what is in scope vs explicitly out, technical or platform constraints, p
 
 Delegate codebase exploration (the **guard-the-context-window** principle skill).
 
-- Prefer `subagent_type: "keel-agent"`. `general-purpose` is the fallback. Never use the built-in `plan` subagent_type; it ignores this skill.
+- Prefer `subagent_type: "pstack:poteto-agent"`. `general-purpose` is the fallback. Never use the built-in `plan` subagent_type; it ignores this skill.
 - Pass `model:` explicitly per the configured roles (defaults `grok-4.5` for code, `grok-4.6` for judgment).
 
 Each explorer returns file pointers, conventions, dependencies, test infrastructure, and entry points. No inlined dumps.
@@ -92,7 +92,7 @@ For bug fixes, the loop is reproduce on the surface, fix, verify on the same sur
 
 ## 6. Implementation guidance
 
-In the overview, name which keel non-negotiables the implementer must apply, by name:
+In the overview, name which pstack non-negotiables the implementer must apply, by name:
 
 - the **how** skill over each unfamiliar subsystem before changing it.
 - the **interrogate** skill for adversarial review on contested designs before shipping.

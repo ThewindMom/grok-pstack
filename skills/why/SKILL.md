@@ -115,7 +115,7 @@ Aim for a complete **coverage map**, not a minimal one. A null result from an is
 
 Launch all matching investigators in a single message so they run concurrently. One investigator per category lets each specialize in one tool's query vocabulary and result shape. Don't ask one agent to cover multiple MCPs.
 
-The parent session owns every spawn. Investigators are leaves. See the keel skill `references/spawn.md`.
+The parent session owns every spawn. Investigators are leaves. See the poteto-mode skill `references/spawn.md`.
 
 Subagent config (each):
 - `subagent_type`: `general-purpose`

@@ -11,7 +11,7 @@ const commanderPackagePath = join(
 );
 const installKeyPath = join(
   nodeModulesDirectory,
-  ".keel-tools-install-key"
+  ".pstack-tools-install-key"
 );
 
 function currentInstallKey(): string {
