@@ -25,7 +25,8 @@ goal: <one sentence>
 workers:
 - label: <name>
   type: grok-pstack:poteto-agent | general-purpose | explore | grok-pstack:comment-sicko
-  model: grok-4.6 | grok-4.5
+  model: grok-4.6
+  effort: high | xhigh
   capability_mode: read-only | all
   isolation: none | worktree
   prompt: <self-contained brief>
@@ -36,7 +37,7 @@ The parent runs those `spawn_subagent` calls. You do not.
 
 ## Models
 
-Only `grok-4.6` and `grok-4.5`. If the parent named a model, use it. Otherwise inherit the parent.
+Only `grok-4.6`. Mechanical work is effort `high`. Judgment is effort `xhigh`. Never `grok-4.5`. If the parent named a model, use it. Otherwise inherit the parent.
 
 ## Do not
 

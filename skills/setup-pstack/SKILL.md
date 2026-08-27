@@ -22,9 +22,11 @@ Project wins when both exist. Re-runs overwrite the chosen files so setup stays 
 
 ### 1. Detect available models
 
-The only slugs pstack will write are `grok-4.6` and `grok-4.5`. Confirm they resolve on `spawn_subagent` in this session. If a slug is rejected, do not write it.
+The only slug pstack will write is `grok-4.6`. Confirm it resolves on `spawn_subagent` in this session. If the slug is rejected, do not write it.
 
 `inherit-parent` and `auto` are always valid. They mean omit `model` so the child inherits the parent chat model.
+
+The only efforts pstack will write are `high` and `xhigh`. There is no `grok-4.5` slot, no `low`, no `medium`, no `default`.
 
 ### 2. Load current state
 
@@ -34,14 +36,16 @@ If the target `pstack.toml` exists, read it. Otherwise start from the defaults i
 
 Show every role with its current model and effort. For panel roles the value is a list. One child runs per entry, so the list length is the panel size.
 
-pstack cannot run four vendors. A panel is four Grok children that differ by model, effort, and persona:
+pstack cannot run four vendors. A panel is four Grok children that differ by effort and persona. Every slot is `grok-4.6`:
 
 | Slot | Default model | Effort | Persona |
 |---|---|---|---|
-| A | `grok-4.6` | high | adversarial |
-| B | `grok-4.6` | default | quality |
-| C | `grok-4.5` | low | mechanical |
-| D | `grok-4.6` | high | architecture |
+| A | `grok-4.6` | xhigh | adversarial |
+| B | `grok-4.6` | high | quality |
+| C | `grok-4.6` | high | mechanical |
+| D | `grok-4.6` | xhigh | architecture |
+
+Mechanical work is `grok-4.6` `high`. Judgment work is `grok-4.6` `xhigh`.
 
 `arena cross-judge pool` is also a list. Arena picks one entry whose effort or persona differs from the parent. There is no other model family to switch to.
 
@@ -51,7 +55,11 @@ Ask whether to accept as-is or change specific roles. Prefer `ask_user_question`
 
 ### 4. Validate
 
-Every real slug must be `grok-4.6` or `grok-4.5`. `inherit-parent` and `auto` always pass. Refuse Claude, GPT, Cursor, and any other slug.
+Every real slug must be `grok-4.6`. `inherit-parent` and `auto` always pass. Refuse `grok-4.5`, Claude, GPT, Cursor, and any other slug.
+
+Every real effort must be `high` or `xhigh`. Refuse `low`, `medium`, `default`, `max`, `none`, `minimal`.
+
+`spawn_subagent` takes `model`. It does not take `effort`. Write effort into `pstack.toml` and put `Reasoning effort: high` or `Reasoning effort: xhigh` as the first line of the child prompt. See the poteto-mode skill `references/spawn.md`.
 
 ### 5. Write the files
 
@@ -63,109 +71,110 @@ Write that path as `scripts_root` at the top of `pstack.toml`. Then run `"$scrip
 
 ```toml
 # pstack per-role model and effort. Delete a key to fall back to the skill default.
-# Models: grok-4.6, grok-4.5, inherit-parent, auto.
+# Model: grok-4.6, inherit-parent, auto.
+# Effort: high (mechanical), xhigh (judgment). Never grok-4.5.
 
 # Absolute path to this install's skills/poteto-mode/scripts. Playbooks resolve tools through it.
 scripts_root = "/absolute/path/to/skills/poteto-mode/scripts"
 
 [roles]
-"feature, refactoring" = { model = "grok-4.5" }
-"bug-fix" = { model = "grok-4.6" }
-"perf-issue" = { model = "grok-4.6" }
-"hillclimb" = { model = "grok-4.6" }
-"judgment and prose" = { model = "grok-4.6", effort = "high" }
-"hardest tasks" = { model = "grok-4.6", effort = "high" }
-"how explorer" = { model = "grok-4.5" }
-"how explainer" = { model = "grok-4.6", effort = "high" }
-"why investigators" = { model = "grok-4.5" }
-"why synthesizer" = { model = "grok-4.6", effort = "high" }
-"reflect tooling" = { model = "grok-4.5" }
-"reflect judgment, divergent, synthesizer" = { model = "grok-4.6", effort = "high" }
-"swarm workers" = { model = "grok-4.5" }
+"feature, refactoring" = { model = "grok-4.6", effort = "high" }
+"bug-fix" = { model = "grok-4.6", effort = "xhigh" }
+"perf-issue" = { model = "grok-4.6", effort = "xhigh" }
+"hillclimb" = { model = "grok-4.6", effort = "xhigh" }
+"judgment and prose" = { model = "grok-4.6", effort = "xhigh" }
+"hardest tasks" = { model = "grok-4.6", effort = "xhigh" }
+"how explorer" = { model = "grok-4.6", effort = "high" }
+"how explainer" = { model = "grok-4.6", effort = "xhigh" }
+"why investigators" = { model = "grok-4.6", effort = "high" }
+"why synthesizer" = { model = "grok-4.6", effort = "xhigh" }
+"reflect tooling" = { model = "grok-4.6", effort = "high" }
+"reflect judgment, divergent, synthesizer" = { model = "grok-4.6", effort = "xhigh" }
+"swarm workers" = { model = "grok-4.6", effort = "high" }
 
 [[panels.how_critics]]
 model = "grok-4.6"
-effort = "high"
+effort = "xhigh"
 persona = "adversarial"
 
 [[panels.how_critics]]
 model = "grok-4.6"
-effort = "default"
+effort = "high"
 persona = "quality"
-
-[[panels.how_critics]]
-model = "grok-4.5"
-effort = "low"
-persona = "mechanical"
 
 [[panels.how_critics]]
 model = "grok-4.6"
 effort = "high"
+persona = "mechanical"
+
+[[panels.how_critics]]
+model = "grok-4.6"
+effort = "xhigh"
 persona = "architecture"
 
 [[panels.arena_runners]]
 model = "grok-4.6"
-effort = "high"
+effort = "xhigh"
 persona = "adversarial"
 
 [[panels.arena_runners]]
 model = "grok-4.6"
-effort = "default"
+effort = "high"
 persona = "quality"
-
-[[panels.arena_runners]]
-model = "grok-4.5"
-effort = "low"
-persona = "mechanical"
 
 [[panels.arena_runners]]
 model = "grok-4.6"
 effort = "high"
+persona = "mechanical"
+
+[[panels.arena_runners]]
+model = "grok-4.6"
+effort = "xhigh"
 persona = "architecture"
 
 [[panels.arena_cross_judge]]
 model = "grok-4.6"
-effort = "high"
+effort = "xhigh"
 persona = "judgment"
 
 [[panels.architect_runners]]
 model = "grok-4.6"
-effort = "high"
+effort = "xhigh"
 persona = "adversarial"
 
 [[panels.architect_runners]]
 model = "grok-4.6"
-effort = "default"
+effort = "high"
 persona = "quality"
-
-[[panels.architect_runners]]
-model = "grok-4.5"
-effort = "low"
-persona = "mechanical"
 
 [[panels.architect_runners]]
 model = "grok-4.6"
 effort = "high"
+persona = "mechanical"
+
+[[panels.architect_runners]]
+model = "grok-4.6"
+effort = "xhigh"
 persona = "architecture"
 
 [[panels.interrogate_reviewers]]
 model = "grok-4.6"
-effort = "high"
+effort = "xhigh"
 persona = "adversarial"
 
 [[panels.interrogate_reviewers]]
 model = "grok-4.6"
-effort = "default"
+effort = "high"
 persona = "quality"
-
-[[panels.interrogate_reviewers]]
-model = "grok-4.5"
-effort = "low"
-persona = "mechanical"
 
 [[panels.interrogate_reviewers]]
 model = "grok-4.6"
 effort = "high"
+persona = "mechanical"
+
+[[panels.interrogate_reviewers]]
+model = "grok-4.6"
+effort = "xhigh"
 persona = "architecture"
 ```
 
@@ -177,7 +186,8 @@ Also write a short always-on rule next to it so new sessions see the mapping.
 # pstack models
 
 Read `~/.grok/pstack.toml` or `.grok/pstack.toml` before any `spawn_subagent` call.
-Use only `grok-4.6` and `grok-4.5`. The parent session owns every fan-out.
+Use only `grok-4.6`. Mechanical work is effort `high`. Judgment is effort `xhigh`.
+Never `grok-4.5`. The parent session owns every fan-out.
 Children do not spawn. See the poteto-mode skill `references/spawn.md`.
 Resolve harness tools through `scripts_root` or `~/.grok/bin` (`pstack-watch-pr`, `pstack-orch`, `pstack-worktree-audit`). See the poteto-mode skill `references/scripts.md`.
 ```

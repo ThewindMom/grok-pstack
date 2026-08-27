@@ -119,7 +119,7 @@ The parent session owns every spawn. Investigators are leaves. See the poteto-mo
 
 Subagent config (each):
 - `subagent_type`: `general-purpose`
-- `model`: your configured why-investigators model (default `grok-4.5`)
+- `model`: your configured why-investigators model (default `grok-4.6`, effort `high`)
 - `capability_mode`: `all` so MCP and `gh` work. Investigators still shouldn't write anything. That's a posture, not a sandbox.
 
 Each investigator gets:
@@ -165,7 +165,7 @@ If your scope assessment suggests a single-commit trivial target where the PR de
 Spawn one synthesizer child from this session:
 
 - `subagent_type`: `general-purpose`
-- `model`: your configured why-synthesizer model (default `grok-4.6`)
+- `model`: your configured why-synthesizer model (default `grok-4.6`, effort `xhigh`)
 - `capability_mode`: `all`. The synthesizer's quality check spot-verifies citations, which can require MCP and `gh`.
 
 The synthesizer gets:

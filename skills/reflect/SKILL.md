@@ -34,15 +34,15 @@ One message, three `spawn_subagent` calls, `subagent_type: general-purpose`, exp
 
 | Lens | Model | Prompt template |
 |---|---|---|
-| Judgment | configured reflect-judgment (default `grok-4.6`) | `references/judgment-reviewer.md` |
-| Tooling | configured reflect-tooling (default `grok-4.5`) | `references/tooling-reviewer.md` |
-| Divergent | configured reflect-judgment (default `grok-4.6`) | `references/divergent-reviewer.md` |
+| Judgment | configured reflect-judgment (default `grok-4.6` `xhigh`) | `references/judgment-reviewer.md` |
+| Tooling | configured reflect-tooling (default `grok-4.6` `high`) | `references/tooling-reviewer.md` |
+| Divergent | configured reflect-judgment (default `grok-4.6` `xhigh`) | `references/divergent-reviewer.md` |
 
 Pass each template verbatim, substituting the transcript path or digest where marked. Reviewers return findings in the child response body.
 
 ### 3. Synthesize
 
-One `spawn_subagent` call, `subagent_type: general-purpose`, configured reflect-judgment model (default `grok-4.6`), `capability_mode: all`. Use `references/synthesizer.md` verbatim, with each reviewer's full output inlined where marked. The synthesizer returns a structured Accepted / Rejected / Backlog list.
+One `spawn_subagent` call, `subagent_type: general-purpose`, configured reflect-judgment model (default `grok-4.6` `xhigh`), `capability_mode: all`. Use `references/synthesizer.md` verbatim, with each reviewer's full output inlined where marked. The synthesizer returns a structured Accepted / Rejected / Backlog list.
 
 ### 4. Structural enforcement check
 

@@ -2,7 +2,7 @@
 
 i'm porting [poteto](https://x.com/poteto)'s pstack to Grok Build.
 
-pstack is Lauren Tan's answer to slop. the playbooks and the 21 principles are hers. the harness here is Grok-native: `spawn_subagent`, depth 1, `grok-4.6` / `grok-4.5`. no Cursor `Task`, no cloud agents, no Fable/Sol slugs.
+pstack is Lauren Tan's answer to slop. the playbooks and the 21 principles are hers. the harness here is Grok-native: `spawn_subagent`, depth 1, `grok-4.6` high / `grok-4.6` xhigh. no Cursor `Task`, no cloud agents, no Fable/Sol slugs, no `grok-4.5`.
 
 if you want to go fast, go deep first. throughput without quality is not the goal. pstack helps you write less, but higher quality code.
 
@@ -36,7 +36,7 @@ two steps:
 1. run `/setup-pstack` and choose which Grok models you want per role.
 2. use `/poteto-mode` whenever you're doing anything that requires rigor.
 
-that's it. the other skills are situational; the mode skill uses them for you as needed. out of the box mechanical code goes to `grok-4.5` and judgment goes to `grok-4.6`. `/setup-pstack` changes any of it.
+that's it. the other skills are situational; the mode skill uses them for you as needed. out of the box mechanical code goes to `grok-4.6` `high` and judgment goes to `grok-4.6` `xhigh`. never `grok-4.5`. `/setup-pstack` changes any of it.
 
 ## what `/poteto-mode` does
 
@@ -56,7 +56,7 @@ it stays on for the conversation until you opt out.
 
 ## grok-only facts
 
-**models.** `grok-4.6` (default, judgment) and `grok-4.5` (fast, mechanical). no claude. no gpt. no cursor slugs. multi-model panels in cursor pstack become multi-effort and multi-persona grok children. `/setup-pstack` writes `~/.grok/pstack.toml` or project `.grok/pstack.toml`. it never writes `~/.cursor/rules/`.
+**models.** only `grok-4.6`. mechanical work is effort `high`. judgment is effort `xhigh`. no `grok-4.5`. no claude. no gpt. no cursor slugs. multi-model panels in cursor pstack become multi-effort and multi-persona grok children. `/setup-pstack` writes `~/.grok/pstack.toml` or project `.grok/pstack.toml`. it never writes `~/.cursor/rules/`.
 
 **depth is 1.** a grok subagent cannot spawn subagents. cursor pstack playbooks that fanned out from a `poteto-agent` child will silently fail here if you leave them nested. the parent session running `/poteto-mode` owns every `spawn_subagent` call. `grok-pstack:poteto-agent` is a leaf. if a leaf needs more workers, it returns a `FANOUT` block and stops.
 

@@ -12,9 +12,11 @@ Call `spawn_subagent`. Required: `prompt`, `description`. Optional:
 | `background` | `true` for parallel work |
 | `capability_mode` | `read-only`, `read-write`, `execute`, `all` |
 | `isolation` | `none` (shared tree) or `worktree` |
-| `model` | `grok-4.6` or `grok-4.5` only |
+| `model` | `grok-4.6` only |
 | `resume_from` | completed child id, same type |
 | `cwd` | working directory. Not with `isolation: worktree` |
+
+`spawn_subagent` has no `effort` field. Put the configured effort on the first line of `prompt` as `Reasoning effort: high` or `Reasoning effort: xhigh`, then the persona, then the brief.
 
 Retrieve a background child with `get_command_or_subagent_output`. Kill with `kill_command_or_subagent`.
 
@@ -45,18 +47,18 @@ Routed workflow skills set their own type. Do not override those to `grok-pstack
 
 ## Models and panels
 
-pstack models are `grok-4.6` (default, judgment) and `grok-4.5` (fast, mechanical). No Claude. No GPT. No Cursor slugs.
+pstack's only slug is `grok-4.6`. Mechanical work is effort `high`. Judgment is effort `xhigh`. No `grok-4.5`. No Claude. No GPT. No Cursor slugs.
 
-A four-vendor panel becomes four Grok children that differ by model, effort, and persona in the prompt:
+A four-vendor panel becomes four Grok children that differ by effort and persona in the prompt:
 
-1. `grok-4.6` high effort, adversarial
-2. `grok-4.6` default effort, quality / instruction-following
-3. `grok-4.5` low effort, mechanical
-4. `grok-4.6` high effort, architecture
+1. `grok-4.6` xhigh, adversarial
+2. `grok-4.6` high, quality / instruction-following
+3. `grok-4.6` high, mechanical
+4. `grok-4.6` xhigh, architecture
 
 `/setup-pstack` writes `~/.grok/pstack.toml` (or project `.grok/pstack.toml`). Skills read that file. A missing key keeps the skill default. `inherit-parent` or `auto` means omit `model`.
 
-There is no separate model family to pick a cross-judge from. Pick the unused effort or the unused persona instead.
+There is no separate model family to pick a cross-judge from. Pick the unused effort (`high` vs `xhigh`) or the unused persona instead.
 
 ## Capability
 

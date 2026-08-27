@@ -47,7 +47,7 @@ The right decomposition depends on the question. Use your judgment. Narrow quest
 Spawn all explorers in a single message:
 
 - `subagent_type`: `explore`
-- `model`: configured how-explorer (default `grok-4.5`)
+- `model`: configured how-explorer (default `grok-4.6`, effort `high`)
 - `capability_mode`: `read-only`
 - `background`: `true`
 
@@ -67,7 +67,7 @@ Then proceed to Step 3.
 Spawn a single child that explores and explains in one pass:
 
 - `subagent_type`: `general-purpose`
-- `model`: configured how-explainer (default `grok-4.6`)
+- `model`: configured how-explainer (default `grok-4.6`, effort `xhigh`)
 - `capability_mode`: `read-only`
 
 The agent does its own exploration and writes the explanation directly. Read `references/explainer-prompt.md` for the communication style and output format. Same structure, just no explorer findings as input.
@@ -79,7 +79,7 @@ Proceed to Step 4.
 Once all explorers return, spawn a single child to synthesize their findings into one coherent explanation:
 
 - `subagent_type`: `general-purpose`
-- `model`: configured how-explainer (default `grok-4.6`)
+- `model`: configured how-explainer (default `grok-4.6`, effort `xhigh`)
 - `capability_mode`: `read-only`
 
 The explainer gets all explorers' findings and writes the human-facing explanation (output format below). Read `references/explainer-prompt.md` for the full prompt template. The explainer reconciles overlapping findings, resolves contradictions, and weaves the slices into a unified picture.
@@ -116,17 +116,17 @@ After the explanation is complete, spawn one architectural critic per entry in t
 
 | Slot | Model | Effort | Persona |
 |---|---|---|---|
-| A | `grok-4.6` | high | adversarial |
-| B | `grok-4.6` | default | quality |
-| C | `grok-4.5` | low | mechanical |
-| D | `grok-4.6` | high | architecture |
+| A | `grok-4.6` | xhigh | adversarial |
+| B | `grok-4.6` | high | quality |
+| C | `grok-4.6` | high | mechanical |
+| D | `grok-4.6` | xhigh | architecture |
 
 For each critic:
 - `subagent_type`: `general-purpose`
 - `model` and persona from the panel
 - `capability_mode`: `read-only`
 
-Put the persona in the prompt. Grok has no four-vendor panel. Diversity is effort plus stance.
+Put `Reasoning effort: high` or `Reasoning effort: xhigh` and the persona in the prompt. Grok has no four-vendor panel. Diversity is effort plus stance. Never `grok-4.5`.
 
 Read `references/critic-prompt.md` for the prompt template. Each critic gets:
 1. The explanation from Step 1 (so they don't re-explore)

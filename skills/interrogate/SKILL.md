@@ -39,10 +39,10 @@ Launch all reviewers in a single message using `spawn_subagent`. Use `panels.int
 
 | Slot | Model | Effort | Persona |
 |---|---|---|---|
-| A | `grok-4.6` | high | adversarial |
-| B | `grok-4.6` | default | quality |
-| C | `grok-4.5` | low | mechanical |
-| D | `grok-4.6` | high | architecture |
+| A | `grok-4.6` | xhigh | adversarial |
+| B | `grok-4.6` | high | quality |
+| C | `grok-4.6` | high | mechanical |
+| D | `grok-4.6` | xhigh | architecture |
 
 For each reviewer:
 - `subagent_type`: `general-purpose`
@@ -50,7 +50,7 @@ For each reviewer:
 - `capability_mode`: `read-only`
 - `background`: `true`
 
-Put the persona in the prompt. If a model slug is rejected, fall back to `grok-4.6` and keep going. If the configured value is `inherit-parent` or `auto`, omit `model`.
+Put `Reasoning effort: high` or `Reasoning effort: xhigh` and the persona in the prompt. If a model slug is rejected, fall back to `grok-4.6` and keep going. Never `grok-4.5`. If the configured value is `inherit-parent` or `auto`, omit `model`.
 
 Read `references/reviewer-prompt.md` and fill in the template with:
 1. The stated intent

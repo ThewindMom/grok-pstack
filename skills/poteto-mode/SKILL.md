@@ -88,11 +88,11 @@ Read `references/spawn.md` before the first spawn. Read `references/scripts.md` 
 
 **Use `subagent_type: "grok-pstack:poteto-agent"` for code-writing delegates and ad-hoc helpers.** Grok qualifies plugin agents as `plugin-name:agent-name`. `/poteto-mode` and `poteto-agent` share the same style. Routed workflow skills (`how`, `why`, `interrogate`, `reflect`, `swarm`) set their own type; respect that, don't override to `grok-pstack:poteto-agent`.
 
-**Defaults for every `spawn_subagent` call.** `background: true`, file pointers not inlined context, explicit `model` per role from `~/.grok/pstack.toml` or `.grok/pstack.toml` (defaults `grok-4.5` for mechanical code, `grok-4.6` for judgment and prose). Reviewers and explorers use `capability_mode: "read-only"`. Writers use `all`. Isolated writers use `isolation: "worktree"`. Hardest changes go to `grok-4.6`. Trivial mechanical edits go to `grok-4.5`. `inherit-parent` or `auto` means omit `model`.
+**Defaults for every `spawn_subagent` call.** `background: true`, file pointers not inlined context, explicit `model` per role from `~/.grok/pstack.toml` or `.grok/pstack.toml` (always `grok-4.6`; effort `high` for mechanical code, `xhigh` for judgment and prose). Reviewers and explorers use `capability_mode: "read-only"`. Writers use `all`. Isolated writers use `isolation: "worktree"`. Hardest changes go to `grok-4.6` `xhigh`. Mechanical edits go to `grok-4.6` `high`. Put `Reasoning effort: high` or `Reasoning effort: xhigh` on the first line of the child prompt. `inherit-parent` or `auto` means omit `model`.
 
-Only `grok-4.6` and `grok-4.5`. Multi-model panels are multi-effort and multi-persona Grok children, not four vendors.
+Only `grok-4.6`. Never `grok-4.5`. Multi-model panels are multi-effort and multi-persona Grok children, not four vendors.
 
-You own every child's work. Review the diff and write your own summary. Prefer a fresh spawn with consolidated scope over `resume_from`. A second opinion is the same prompt against the other model or a different persona. Agreement is high-signal.
+You own every child's work. Review the diff and write your own summary. Prefer a fresh spawn with consolidated scope over `resume_from`. A second opinion is the same prompt against the other effort (`high` vs `xhigh`) or a different persona. Agreement is high-signal.
 
 ## Writing the reply
 

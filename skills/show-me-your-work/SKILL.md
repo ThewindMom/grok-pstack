@@ -64,7 +64,7 @@ Fix the log, not the story. If the work diverged from what a row claims, the row
 
 ## Cross-model review of the trail
 
-Before handing back, you must spawn a child on a different model or effort from the one that did the work (`grok-4.5` if the parent was `grok-4.6`, or the other way around). Self-review is not a substitute; the point is fresh eyes you cannot bring yourself. The child reads the audit trail and the run's transcript, then flags what the user should pay attention to. Not a redo of the work, a scan for what's suboptimal or risky. Spawn it from this parent session.
+Before handing back, you must spawn a child on a different effort from the one that did the work (`grok-4.6` `high` if the parent was `xhigh`, `grok-4.6` `xhigh` if the parent was `high`). Never `grok-4.5`. Self-review is not a substitute; the point is fresh eyes you cannot bring yourself. The child reads the audit trail and the run's transcript, then flags what the user should pay attention to. Not a redo of the work, a scan for what's suboptimal or risky. Spawn it from this parent session.
 
 - Decisions logged with weak or absent evidence.
 - Verification steps skipped or claimed without proof in the transcript.
