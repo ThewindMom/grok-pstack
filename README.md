@@ -60,7 +60,7 @@ it stays on for the conversation until you opt out.
 
 **depth is 1.** a grok subagent cannot spawn subagents. cursor pstack playbooks that fanned out from a `poteto-agent` child will silently fail here if you leave them nested. the parent session running `/poteto-mode` owns every `spawn_subagent` call. `grok-pstack:poteto-agent` is a leaf. if a leaf needs more workers, it returns a `FANOUT` block and stops.
 
-**spawn.** use `spawn_subagent`, not cursor `Task`. built-in types are `general-purpose`, `explore`, and `plan`. pstack adds `grok-pstack:poteto-agent` and `grok-pstack:comment-sicko`. grok qualifies plugin agents as `plugin-name:agent-name`.
+**spawn.** use `spawn_subagent`, not cursor `Task`. pstack agents are `grok-pstack:poteto-agent` (high) and `grok-pstack:poteto-judge` (xhigh) for style, `grok-pstack:pstack-high` / `grok-pstack:pstack-xhigh` for panels, and `grok-pstack:comment-sicko`. do not spawn grok's built-in `explore` agent. it is pinned to medium effort. grok qualifies plugin agents as `plugin-name:agent-name`.
 
 ## playbooks
 
@@ -117,6 +117,7 @@ the [guide](./docs/guide/README.md) walks a first real task.
 | `/typescript-best-practices` | type-system-discipline in TypeScript |
 | `/figure-it-out` | no bundled playbook fits |
 | `/show-me-your-work` | decision trail |
+| `/drive` | prove behavior on the real surface |
 | `/create-verification-skill` | project-local verify skill |
 | `/maintain-verification-skill` | keep the feature map honest |
 | `/bro` | restate the last message in plain language |
@@ -126,7 +127,9 @@ the [guide](./docs/guide/README.md) walks a first real task.
 
 spawn from the parent with `spawn_subagent`:
 
-- [`grok-pstack:poteto-agent`](./agents/poteto-agent.md). leaf worker. reads poteto-mode including the principles index. cannot spawn.
+- [`grok-pstack:poteto-agent`](./agents/poteto-agent.md). leaf worker at `grok-4.6` high. reads poteto-mode including the principles index. cannot spawn.
+- [`grok-pstack:poteto-judge`](./agents/poteto-judge.md). same style at `grok-4.6` xhigh.
+- [`grok-pstack:pstack-high`](./agents/pstack-high.md) / [`grok-pstack:pstack-xhigh`](./agents/pstack-xhigh.md). panel and review leaves. effort is the type.
 - [`grok-pstack:comment-sicko`](./agents/comment-sicko.md). comment reviewer. usually through `/no-comments`.
 
 ## credit
@@ -138,10 +141,11 @@ we did not invent the playbooks or the principles.
 ## not ported
 
 - **Benny.** Cursor automations for Slack triage. no Grok equivalent. skip.
-- **cursor-team-kit** (`control-ui`, `control-cli`). drive the real surface yourself, or generate a project verify skill with `/create-verification-skill`. `/deslop` is reimplemented here.
-- **Cursor `/loop`.** use Grok `monitor` and background commands.
+- **cursor-team-kit** (`control-ui`, `control-cli`). the **drive** skill is the Grok stand-in (project `verify-*`, Playwright MCP, PTY). `/deslop` is reimplemented here.
+- **Cursor `/loop`.** `pstack-heartbeat` under Grok `monitor`. re-arm after every `DONE`.
 - **Cursor cloud `environment` / `cloud_base_branch`.** use `isolation: worktree` or put the ref in the brief.
-- **Four-vendor model panels.** replaced by Grok effort and persona slots.
+- **Four-vendor model panels.** replaced by `pstack-high` / `pstack-xhigh` plus persona.
+- **`/make-bot-ui`.** Cursor Grok Bot webhooks. skip.
 
 ## license
 

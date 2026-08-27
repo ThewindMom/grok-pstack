@@ -36,16 +36,16 @@ If the target `pstack.toml` exists, read it. Otherwise start from the defaults i
 
 Show every role with its current model and effort. For panel roles the value is a list. One child runs per entry, so the list length is the panel size.
 
-pstack cannot run four vendors. A panel is four Grok children that differ by effort and persona. Every slot is `grok-4.6`:
+pstack cannot run four vendors. A panel is four Grok children that differ by agent type and persona. Every slot is `grok-4.6`. Effort is the type, because `spawn_subagent` has no effort field.
 
-| Slot | Default model | Effort | Persona |
+| Slot | Type | Effort | Persona |
 |---|---|---|---|
-| A | `grok-4.6` | xhigh | adversarial |
-| B | `grok-4.6` | high | quality |
-| C | `grok-4.6` | high | mechanical |
-| D | `grok-4.6` | xhigh | architecture |
+| A | `grok-pstack:pstack-xhigh` | xhigh | adversarial |
+| B | `grok-pstack:pstack-high` | high | quality |
+| C | `grok-pstack:pstack-high` | high | mechanical |
+| D | `grok-pstack:pstack-xhigh` | xhigh | architecture |
 
-Mechanical work is `grok-4.6` `high`. Judgment work is `grok-4.6` `xhigh`.
+Mechanical pstack-style code is `grok-pstack:poteto-agent` (`high`). Judgment pstack-style code is `grok-pstack:poteto-judge` (`xhigh`). Never the built-in `explore` agent. Grok pins it to medium.
 
 `arena cross-judge pool` is also a list. Arena picks one entry whose effort or persona differs from the parent. There is no other model family to switch to.
 
@@ -59,13 +59,13 @@ Every real slug must be `grok-4.6`. `inherit-parent` and `auto` always pass. Ref
 
 Every real effort must be `high` or `xhigh`. Refuse `low`, `medium`, `default`, `max`, `none`, `minimal`.
 
-`spawn_subagent` takes `model`. It does not take `effort`. Write effort into `pstack.toml` and put `Reasoning effort: high` or `Reasoning effort: xhigh` as the first line of the child prompt. See the poteto-mode skill `references/spawn.md`.
+`spawn_subagent` takes `model`. It does not take `effort`. Pick the agent type from the poteto-mode skill `references/spawn.md`. Write effort into `pstack.toml` so the type mapping stays visible. Do not spawn `general-purpose` or `explore` for a pstack role.
 
 ### 5. Write the files
 
 Resolve the installed plugin's scripts directory before writing. This skill lives at `skills/setup-pstack/`. The tools live at sibling `skills/poteto-mode/scripts/`. Use that absolute path when it contains `worktree-audit.sh`. Otherwise run `skills/poteto-mode/scripts/resolve-scripts.sh` from the plugin tree.
 
-Write that path as `scripts_root` at the top of `pstack.toml`. Then run `"$scripts_root/install-wrappers.sh"`. It writes `pstack-watch-pr`, `pstack-orch`, `pstack-worktree-audit`, `pstack-resolve-scripts`, and `pstack-scripts` under `~/.grok/bin`. Tell the user to put `~/.grok/bin` on `PATH` if it is not already.
+Write that path as `scripts_root` at the top of `pstack.toml`. Then run `"$scripts_root/install-wrappers.sh"`. It writes `pstack-watch-pr`, `pstack-orch`, `pstack-worktree-audit`, `pstack-heartbeat`, `pstack-check-plan`, `pstack-resolve-scripts`, and `pstack-scripts` under `~/.grok/bin`. Tell the user to put `~/.grok/bin` on `PATH` if it is not already.
 
 `pstack.toml`:
 
@@ -186,10 +186,12 @@ Also write a short always-on rule next to it so new sessions see the mapping.
 # pstack models
 
 Read `~/.grok/pstack.toml` or `.grok/pstack.toml` before any `spawn_subagent` call.
-Use only `grok-4.6`. Mechanical work is effort `high`. Judgment is effort `xhigh`.
-Never `grok-4.5`. The parent session owns every fan-out.
+Use only `grok-4.6`. Spawn `grok-pstack:poteto-agent` or `grok-pstack:pstack-high` for mechanical work.
+Spawn `grok-pstack:poteto-judge` or `grok-pstack:pstack-xhigh` for judgment.
+Never `grok-4.5`. Never the built-in `explore` agent. The parent session owns every fan-out.
 Children do not spawn. See the poteto-mode skill `references/spawn.md`.
-Resolve harness tools through `scripts_root` or `~/.grok/bin` (`pstack-watch-pr`, `pstack-orch`, `pstack-worktree-audit`). See the poteto-mode skill `references/scripts.md`.
+Drive the real surface with the `drive` skill.
+Resolve harness tools through `scripts_root` or `~/.grok/bin` (`pstack-watch-pr`, `pstack-orch`, `pstack-worktree-audit`, `pstack-heartbeat`, `pstack-check-plan`). See the poteto-mode skill `references/scripts.md`.
 ```
 
 ### 6. Confirm

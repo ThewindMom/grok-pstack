@@ -25,6 +25,8 @@ write_wrap() {
 write_wrap pstack-watch-pr "$here/watch-pr/watch-pr"
 write_wrap pstack-worktree-audit "$here/worktree-audit.sh"
 write_wrap pstack-resolve-scripts "$here/resolve-scripts.sh"
+write_wrap pstack-heartbeat "$here/heartbeat.sh"
+write_wrap pstack-check-plan "$here/check-plan.mjs"
 
 {
 	echo '#!/usr/bin/env bash'

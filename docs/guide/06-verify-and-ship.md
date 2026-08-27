@@ -36,7 +36,7 @@ The UI bullet above hides a real requirement. The agent needs a scripted way to 
 
 It writes `.grok/skills/verify-<app>/`, agent-facing instructions with exact Launch, Doctor, Drive, Evidence, and Cleanup sections, plus a feature map under `features/` that indexes what the app does and what result proves each feature works. The skill ships a [worked feature-map example](../../skills/create-verification-skill/references/feature-map-example/) with a README index and one file per feature using the four required H2s. Before handing it over, the generator proves the skill once end to end: launch, doctor check, drive one feature, capture evidence, clean up. If that proof fails, don't use the output.
 
-From then on, "verify it in the app" is a step any agent can execute, in this repo, with no setup conversation.
+From then on, "verify it in the app" is a step any agent can execute, in this repo, with no setup conversation. Playbooks reach it through the [`drive`](../../skills/drive/SKILL.md) skill, which uses that `verify-*` skill when it exists and otherwise Playwright MCP, a PTY, or HTTP.
 
 Once the verify skill works, a [`/swarm`](../../skills/swarm/SKILL.md) can split a full pass by feature-map entry and aggregate the results.
 

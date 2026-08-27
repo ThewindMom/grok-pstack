@@ -25,7 +25,7 @@ Remaining triggers:
 - Docs, RFCs, readmes, PR descriptions, or commit messages → the **technical-writing** skill (`/technical-writing`).
 - Before commit → the **deslop** skill (`/deslop`).
 - Before review → the **no-comments** skill (`/no-comments`).
-- Shipping UI / IDE / CLI → drive the real surface yourself (browser, TUI, CLI, API). There is no `control-ui` or `control-cli` plugin here. For bug fixes, reproduce first on the same surface yourself; hand to the user only under the narrow Bug fix step 1 exception.
+- Shipping UI / IDE / CLI → the **drive** skill. Project `verify-*` first, then Playwright MCP, a PTY, or HTTP. There is no `control-ui` or `control-cli` plugin here. For bug fixes, reproduce first on the same surface yourself; hand to the user only under the narrow Bug fix step 1 exception.
 - Any PR-status request → the **Babysit** playbook (`playbooks/babysit.md`). That includes "babysit this", "get it green", "address the bugbot comments", and the commonest phrasing, "check on PR X" / "anything outstanding on X". Never triggered by merely opening a PR. Declare its mode before polling; the playbook's step 1 owns the request-to-mode mapping. A child that starts driving a PR never finishes its turn. The parent drives.
 - Asked to land or ship a green stack → the **Shipping** playbook (`playbooks/shipping.md`). Green is not safe. Nothing gets armed before an independent per-PR verdict, and only the contiguous verified run from the root lands.
 - Bugbot or the agentic security review commented → skeptical posture. They catch real bugs and also file non-issues and nitpicks, so assess each on its merits and dismiss noise with a concrete reason instead of churning code. Triage fix / dismiss / ask per `references/bugbot-triage.md`.
@@ -86,13 +86,13 @@ Read the leaf skill in full for any principle you apply. Each entry names when i
 
 Read `references/spawn.md` before the first spawn. Read `references/scripts.md` before running `watch-pr`, `orch`, or `worktree-audit`. Those tools live in the plugin tree, not the user's project cwd. Grok nesting depth is 1. **This session is the parent.** Every `spawn_subagent` call happens here. A `poteto-agent` child cannot spawn. If a playbook says a child fans out internally, ignore that sentence and do the fan-out yourself. `/no-comments` and the babysit loop stay in this session.
 
-**Use `subagent_type: "grok-pstack:poteto-agent"` for code-writing delegates and ad-hoc helpers.** Grok qualifies plugin agents as `plugin-name:agent-name`. `/poteto-mode` and `poteto-agent` share the same style. Routed workflow skills (`how`, `why`, `interrogate`, `reflect`, `swarm`) set their own type; respect that, don't override to `grok-pstack:poteto-agent`.
+**Use `subagent_type: "grok-pstack:poteto-agent"` for mechanical code-writing delegates.** Use `grok-pstack:poteto-judge` when the slice is judgment (bug-fix, perf, hillclimb). Grok qualifies plugin agents as `plugin-name:agent-name`. Routed workflow skills (`how`, `why`, `interrogate`, `reflect`, `swarm`) set their own type from `references/spawn.md`. Do not override those to `poteto-agent`.
 
-**Defaults for every `spawn_subagent` call.** `background: true`, file pointers not inlined context, explicit `model` per role from `~/.grok/pstack.toml` or `.grok/pstack.toml` (always `grok-4.6`; effort `high` for mechanical code, `xhigh` for judgment and prose). Reviewers and explorers use `capability_mode: "read-only"`. Writers use `all`. Isolated writers use `isolation: "worktree"`. Hardest changes go to `grok-4.6` `xhigh`. Mechanical edits go to `grok-4.6` `high`. Put `Reasoning effort: high` or `Reasoning effort: xhigh` on the first line of the child prompt. `inherit-parent` or `auto` means omit `model`.
+**Defaults for every `spawn_subagent` call.** `background: true`, file pointers not inlined context, type from `references/spawn.md` (effort is the type). Reviewers and explorers use `capability_mode: "read-only"` and `grok-pstack:pstack-high` or `grok-pstack:pstack-xhigh`. Writers use `all`. Isolated writers use `isolation: "worktree"`. Never spawn the built-in `explore` agent. `inherit-parent` or `auto` still omits `model`. It does not change the type.
 
-Only `grok-4.6`. Never `grok-4.5`. Multi-model panels are multi-effort and multi-persona Grok children, not four vendors.
+Only `grok-4.6`. Never `grok-4.5`. Multi-model panels are high vs xhigh agent types plus persona, not four vendors.
 
-You own every child's work. Review the diff and write your own summary. Prefer a fresh spawn with consolidated scope over `resume_from`. A second opinion is the same prompt against the other effort (`high` vs `xhigh`) or a different persona. Agreement is high-signal.
+You own every child's work. Review the diff and write your own summary. Prefer a fresh spawn with consolidated scope over `resume_from`. A second opinion is the other type (`pstack-high` vs `pstack-xhigh`) or a different persona. Agreement is high-signal.
 
 ## Writing the reply
 

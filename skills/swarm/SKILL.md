@@ -24,12 +24,12 @@ Open a todolist with one entry per phase before launching anything.
 1. State the done predicate and the artifact or report the swarm must return.
 2. Choose the shape. Partition into slices, race N workers on identical briefs, or mix both. For a race or mixed shape, declare `first pass`, `rank all`, or `best-of` before spawning.
 3. Set N from the user or derive it from the shape. N is total workers.
-4. Pick the worker model from `swarm workers` in `~/.grok/pstack.toml` or `.grok/pstack.toml` when present. Otherwise use `grok-4.6` effort `high`. For a race, name each arm up front (`grok-4.6` `high` vs `grok-4.6` `xhigh`). Never `grok-4.5`.
+4. Pick the worker type from `swarm workers` in `~/.grok/pstack.toml` or `.grok/pstack.toml` when present. Otherwise use `grok-pstack:pstack-high`. For a race, name each arm up front (`grok-pstack:pstack-high` vs `grok-pstack:pstack-xhigh`). Never `grok-4.5`. Never the built-in `explore` agent.
 5. Give each worker its own writable output when it writes. Use `isolation: worktree`, a branch, or `/tmp/swarm-<slug>/worker-<n>/`.
 
 ## Phase B: Fan out
 
-Spawn all N workers in one message with `subagent_type: general-purpose` (or `grok-pstack:poteto-agent` when the slice is pstack-style implementation), `background: true`, and the configured model. Use `isolation: none` when the worker only reads this machine. Use `worktree` when it writes.
+Spawn all N workers in one message with `subagent_type: grok-pstack:pstack-high` (or `grok-pstack:poteto-agent` when the slice is pstack-style implementation, `grok-pstack:pstack-xhigh` for a judgment race arm), `background: true`, and `model: grok-4.6`. Use `isolation: none` when the worker only reads this machine. Use `worktree` when it writes.
 
 There is no Cursor cloud environment and no `cloud_base_branch`. If a worker must start from a non-default pushed branch, put the ref in the brief and have it check that branch out, or set `cwd` to an existing worktree.
 

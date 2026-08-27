@@ -30,19 +30,19 @@ If no path resolves, write a tight digest of the session and pass that instead.
 
 ### 2. Spawn three reviewers in parallel
 
-One message, three `spawn_subagent` calls, `subagent_type: general-purpose`, explicit `model` on each, `capability_mode: all` so MCP lookups work. The prompt forbids file writes; the parent applies edits.
+One message, three `spawn_subagent` calls, explicit type on each, `capability_mode: all` so MCP lookups work. The prompt forbids file writes; the parent applies edits.
 
-| Lens | Model | Prompt template |
+| Lens | Type | Prompt template |
 |---|---|---|
-| Judgment | configured reflect-judgment (default `grok-4.6` `xhigh`) | `references/judgment-reviewer.md` |
-| Tooling | configured reflect-tooling (default `grok-4.6` `high`) | `references/tooling-reviewer.md` |
-| Divergent | configured reflect-judgment (default `grok-4.6` `xhigh`) | `references/divergent-reviewer.md` |
+| Judgment | `grok-pstack:pstack-xhigh` | `references/judgment-reviewer.md` |
+| Tooling | `grok-pstack:pstack-high` | `references/tooling-reviewer.md` |
+| Divergent | `grok-pstack:pstack-xhigh` | `references/divergent-reviewer.md` |
 
 Pass each template verbatim, substituting the transcript path or digest where marked. Reviewers return findings in the child response body.
 
 ### 3. Synthesize
 
-One `spawn_subagent` call, `subagent_type: general-purpose`, configured reflect-judgment model (default `grok-4.6` `xhigh`), `capability_mode: all`. Use `references/synthesizer.md` verbatim, with each reviewer's full output inlined where marked. The synthesizer returns a structured Accepted / Rejected / Backlog list.
+One `spawn_subagent` call, `subagent_type: grok-pstack:pstack-xhigh`, `capability_mode: all`. Use `references/synthesizer.md` verbatim, with each reviewer's full output inlined where marked. The synthesizer returns a structured Accepted / Rejected / Backlog list.
 
 ### 4. Structural enforcement check
 

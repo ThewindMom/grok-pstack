@@ -46,8 +46,9 @@ The right decomposition depends on the question. Use your judgment. Narrow quest
 
 Spawn all explorers in a single message:
 
-- `subagent_type`: `explore`
-- `model`: configured how-explorer (default `grok-4.6`, effort `high`)
+- `subagent_type`: `grok-pstack:pstack-high`
+- `model`: `grok-4.6`
+- Do not spawn the built-in `explore` agent. It is pinned to medium effort.
 - `capability_mode`: `read-only`
 - `background`: `true`
 
@@ -66,8 +67,8 @@ Then proceed to Step 3.
 
 Spawn a single child that explores and explains in one pass:
 
-- `subagent_type`: `general-purpose`
-- `model`: configured how-explainer (default `grok-4.6`, effort `xhigh`)
+- `subagent_type`: `grok-pstack:pstack-xhigh`
+- `model`: `grok-4.6`
 - `capability_mode`: `read-only`
 
 The agent does its own exploration and writes the explanation directly. Read `references/explainer-prompt.md` for the communication style and output format. Same structure, just no explorer findings as input.
@@ -78,8 +79,8 @@ Proceed to Step 4.
 
 Once all explorers return, spawn a single child to synthesize their findings into one coherent explanation:
 
-- `subagent_type`: `general-purpose`
-- `model`: configured how-explainer (default `grok-4.6`, effort `xhigh`)
+- `subagent_type`: `grok-pstack:pstack-xhigh`
+- `model`: `grok-4.6`
 - `capability_mode`: `read-only`
 
 The explainer gets all explorers' findings and writes the human-facing explanation (output format below). Read `references/explainer-prompt.md` for the full prompt template. The explainer reconciles overlapping findings, resolves contradictions, and weaves the slices into a unified picture.
@@ -114,19 +115,19 @@ Run the full explain flow above (Steps 1-4). You must understand the architectur
 
 After the explanation is complete, spawn one architectural critic per entry in the configured `how_critics` panel (defaults below), all in a single message.
 
-| Slot | Model | Effort | Persona |
+| Slot | Type | Effort | Persona |
 |---|---|---|---|
-| A | `grok-4.6` | xhigh | adversarial |
-| B | `grok-4.6` | high | quality |
-| C | `grok-4.6` | high | mechanical |
-| D | `grok-4.6` | xhigh | architecture |
+| A | `grok-pstack:pstack-xhigh` | xhigh | adversarial |
+| B | `grok-pstack:pstack-high` | high | quality |
+| C | `grok-pstack:pstack-high` | high | mechanical |
+| D | `grok-pstack:pstack-xhigh` | xhigh | architecture |
 
 For each critic:
-- `subagent_type`: `general-purpose`
-- `model` and persona from the panel
+- `subagent_type` from the panel
+- `model`: `grok-4.6`
 - `capability_mode`: `read-only`
 
-Put `Reasoning effort: high` or `Reasoning effort: xhigh` and the persona in the prompt. Grok has no four-vendor panel. Diversity is effort plus stance. Never `grok-4.5`.
+Put the persona in the prompt. Grok has no four-vendor panel. Diversity is the agent type plus stance. Never `grok-4.5`.
 
 Read `references/critic-prompt.md` for the prompt template. Each critic gets:
 1. The explanation from Step 1 (so they don't re-explore)

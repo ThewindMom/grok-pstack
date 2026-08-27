@@ -1,5 +1,7 @@
 # Plan
 
+For a program of stacked PRs, use `playbooks/multi-phase-plan.md` instead. This file is a smaller plan when the work is not a program.
+
 Produce a phased implementation plan grounded in the **Principles** section of the `poteto-mode` skill. The plan is the deliverable. Do not implement.
 
 Open a todolist with one item per step below.
@@ -24,8 +26,8 @@ Resolve what is in scope vs explicitly out, technical or platform constraints, p
 
 Delegate codebase exploration (the **guard-the-context-window** principle skill).
 
-- Prefer `subagent_type: "grok-pstack:poteto-agent"`. `general-purpose` is the fallback. Never use the built-in `plan` subagent_type; it ignores this skill.
-- Pass `model: grok-4.6` explicitly per the configured roles (effort `high` for code, `xhigh` for judgment).
+- Prefer `subagent_type: "grok-pstack:poteto-agent"` for mechanical exploration, `grok-pstack:poteto-judge` for judgment. Never use the built-in `plan` or `explore` types.
+- Pass `model: grok-4.6`. Effort is the type.
 
 Each explorer returns file pointers, conventions, dependencies, test infrastructure, and entry points. No inlined dumps.
 
@@ -83,9 +85,8 @@ Each phase needs both:
 
 **Runtime.** Exercise the feature on the matching surface yourself:
 
-- Browser / Electron / Web UIs: drive the real UI (Playwright, CDP, or the project's verify skill).
-- CLIs and TUIs: run the binary in a PTY or tmux session.
-- Native mobile: whatever simulator-driving skill your team has.
+- Drive the real surface with the **drive** skill (project `verify-*`, Playwright MCP, PTY, or HTTP).
+- Native mobile uses whatever simulator-driving skill the repo has.
 - No way to drive the touched surface: flag it in the plan.
 
 For bug fixes, the loop is reproduce on the surface, fix, verify on the same surface. Unit tests show a branch behaves a certain way; they do not prove the bug is gone (the **prove-it-works** principle skill).

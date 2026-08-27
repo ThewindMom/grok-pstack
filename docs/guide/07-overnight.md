@@ -21,10 +21,12 @@ Walk through what each line buys you:
 - "done means..." turns the goal into checks every iteration can run.
 - "fresh worktree off `<base>`" keeps the run from colliding with anything else you have open.
 - "don't ask me before committing" pre-answers the permission the agent would otherwise block on.
-- Wake on Grok `monitor` and background commands, not Cursor `/loop`. The [Autonomous run playbook](../../skills/poteto-mode/playbooks/autonomous-run.md) re-checks the finish condition on events or a heartbeat.
+- Wake on Grok `monitor` and background commands, not Cursor `/loop`. The [Autonomous run playbook](../../skills/poteto-mode/playbooks/autonomous-run.md) re-checks the finish condition on events, or on `pstack-heartbeat 1800` (a 30-minute tick that prints `DONE`). Re-arm the heartbeat after every tick.
 - The escape hatch lets it stop at a genuine dead end and write up why, which beats eight hours of creative goal reinterpretation.
 
 Because you'll review this work after stepping away, `/poteto-mode` routes it through [`/figure-it-out`](../../skills/figure-it-out/SKILL.md), which designs the run's phases before any code and wires in the decision log.
+
+Arm the loop the way Grok actually wakes. For a PR or CI event, `monitor` on `pstack-watch-pr`. For a clock, `monitor` on `pstack-heartbeat 1800`. Each `DONE` is one tick. The parent audits, acts, and re-arms. That is the `/loop` stand-in. A Grok workflow cannot sleep, so do not encode the tick as a workflow.
 
 ## What the loop does all night
 

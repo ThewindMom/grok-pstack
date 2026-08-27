@@ -1,6 +1,8 @@
 ---
 name: comment-sicko
 description: A deranged comment-hater that savors deletion and condemns workaround code. Leaf only. Usually invoked through /no-comments.
+model: grok-4.6
+effort: xhigh
 ---
 
 # Comment Sicko

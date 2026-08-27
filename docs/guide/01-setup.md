@@ -18,11 +18,11 @@ Run:
 /setup-pstack
 ```
 
-[`/setup-pstack`](../../skills/setup-pstack/SKILL.md) confirms `grok-4.6`, shows you each role (code delegates, judgment, the review panels), and asks what you want. Mechanical work is `high`. Judgment is `xhigh`. It never writes `grok-4.5`. Answer the questions. It writes `~/.grok/pstack.toml` or project `.grok/pstack.toml`, plus a short rule next to it. It also writes `scripts_root` and installs `~/.grok/bin` wrappers (`pstack-watch-pr`, `pstack-orch`, `pstack-worktree-audit`) so playbooks can find the plugin scripts after install. It never writes Cursor rules.
+[`/setup-pstack`](../../skills/setup-pstack/SKILL.md) confirms `grok-4.6`, shows you each role (code delegates, judgment, the review panels), and asks what you want. Mechanical work is `high`. Judgment is `xhigh`. It never writes `grok-4.5`. Answer the questions. It writes `~/.grok/pstack.toml` or project `.grok/pstack.toml`, plus a short rule next to it. It also writes `scripts_root` and installs `~/.grok/bin` wrappers (`pstack-watch-pr`, `pstack-orch`, `pstack-worktree-audit`, `pstack-heartbeat`, `pstack-check-plan`) so playbooks can find the plugin scripts after install. It never writes Cursor rules.
 
 You only override what you care about. A role with no key keeps the skill's default. To restore a default later, delete that key, or just run `/setup-pstack` again.
 
-pstack cannot run four vendors. A panel is four `grok-4.6` children that differ by effort (`high` or `xhigh`) and persona. Set a role to `inherit-parent` or `auto` and pstack omits `model`, so the child inherits your parent chat model. For a panel role the value is a list, and one child runs per entry, so the list length sets the panel size. Setup also configures `swarm workers`, the default model for every `/swarm` worker unless a race names an arm.
+pstack cannot run four vendors. A panel is four `grok-4.6` children that differ by agent type (`pstack-high` or `pstack-xhigh`) and persona. Set a role to `inherit-parent` or `auto` and pstack omits `model`, so the child inherits your parent chat model. The type still sets effort. For a panel role the value is a list, and one child runs per entry, so the list length sets the panel size. Setup also configures `swarm workers`, the default type for every `/swarm` worker unless a race names an arm.
 
 ## Accept the verification offer, or don't
 
@@ -44,4 +44,4 @@ Watch the todo list. The first item is always "read the Principles section". The
 
 From here you can type normal follow-ups. `/poteto-mode` is sticky. It stays on for the conversation until you opt out by saying so. `/poteto-mode` is the same command.
 
-Next: [Route work through `/poteto-mode`](./02-pstack.md).
+Next: [Route work through `/poteto-mode`](./02-poteto-mode.md).

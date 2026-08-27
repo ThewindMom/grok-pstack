@@ -37,20 +37,20 @@ Write one clear paragraph. Reviewers challenge whether the work achieves the int
 
 Launch all reviewers in a single message using `spawn_subagent`. Use `panels.interrogate_reviewers` from `~/.grok/pstack.toml` or `.grok/pstack.toml` when present, one reviewer per entry; otherwise use the table defaults.
 
-| Slot | Model | Effort | Persona |
+| Slot | Type | Effort | Persona |
 |---|---|---|---|
-| A | `grok-4.6` | xhigh | adversarial |
-| B | `grok-4.6` | high | quality |
-| C | `grok-4.6` | high | mechanical |
-| D | `grok-4.6` | xhigh | architecture |
+| A | `grok-pstack:pstack-xhigh` | xhigh | adversarial |
+| B | `grok-pstack:pstack-high` | high | quality |
+| C | `grok-pstack:pstack-high` | high | mechanical |
+| D | `grok-pstack:pstack-xhigh` | xhigh | architecture |
 
 For each reviewer:
-- `subagent_type`: `general-purpose`
-- `model`: the configured entry
+- `subagent_type` from the panel
+- `model`: `grok-4.6`
 - `capability_mode`: `read-only`
 - `background`: `true`
 
-Put `Reasoning effort: high` or `Reasoning effort: xhigh` and the persona in the prompt. If a model slug is rejected, fall back to `grok-4.6` and keep going. Never `grok-4.5`. If the configured value is `inherit-parent` or `auto`, omit `model`.
+Put the persona in the prompt. If a model slug is rejected, keep the type and keep going. Never `grok-4.5`. If the configured value is `inherit-parent` or `auto`, omit `model` and still spawn the high or xhigh type.
 
 Read `references/reviewer-prompt.md` and fill in the template with:
 1. The stated intent

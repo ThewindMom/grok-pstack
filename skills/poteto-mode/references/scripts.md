@@ -34,5 +34,7 @@ If that fails, find the loaded `poteto-mode` skill's `SKILL.md` and use `../scri
 | PR watcher | `pstack-watch-pr` or `"$PSTACK_SCRIPTS/watch-pr/watch-pr"` |
 | Orchestrate store | `pstack-orch` or `bun "$PSTACK_SCRIPTS/orch/orch.ts"` |
 | Worktree audit | `pstack-worktree-audit` or `"$PSTACK_SCRIPTS/worktree-audit.sh"` |
+| Overnight tick | `pstack-heartbeat` or `"$PSTACK_SCRIPTS/heartbeat.sh"` (seconds, default 1800). Prints `DONE` then exits. Arm it with Grok `monitor`. Re-arm after every tick. |
+| Plan checker | `pstack-check-plan` or `node "$PSTACK_SCRIPTS/check-plan.mjs"` |
 
 Never `scripts/watch-pr/watch-pr`, `bun scripts/orch/orch.ts`, or `scripts/worktree-audit.sh` from the project cwd unless that cwd is the plugin itself.
