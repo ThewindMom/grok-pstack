@@ -56,7 +56,7 @@ it stays on for the conversation until you opt out.
 
 ## grok-only facts
 
-**models.** only `grok-4.6`. mechanical work is effort `high`. judgment is effort `xhigh`. no `grok-4.5`. no claude. no gpt. no cursor slugs. multi-model panels in cursor pstack become multi-effort and multi-persona grok children. `/setup-pstack` writes `~/.grok/pstack.toml` or project `.grok/pstack.toml`. it never writes `~/.cursor/rules/`.
+**models.** only `grok-4.6`. mechanical work is effort `high`. judgment is effort `xhigh`. no `grok-4.5`. no claude. no gpt. no cursor slugs. multi-model panels in cursor pstack become multi-effort and multi-persona grok children. `/setup-pstack` writes `~/.grok/pstack.toml` or project `.grok/pstack.toml`, plus Grok roles under `~/.grok/roles/grok-pstack:*.toml` so `reasoning_effort` pins at spawn. it never writes `~/.cursor/rules/`.
 
 **depth is 1.** a grok subagent cannot spawn subagents. cursor pstack playbooks that fanned out from a `poteto-agent` child will silently fail here if you leave them nested. the parent session running `/poteto-mode` owns every `spawn_subagent` call. `grok-pstack:poteto-agent` is a leaf. if a leaf needs more workers, it returns a `FANOUT` block and stops.
 

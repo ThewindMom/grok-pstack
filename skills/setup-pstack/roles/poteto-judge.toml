@@ -1,0 +1,4 @@
+# Matches spawn_subagent type grok-pstack:poteto-judge.
+description = "pstack judgment leaf. grok-4.6 xhigh."
+model = "grok-4.6"
+reasoning_effort = "xhigh"

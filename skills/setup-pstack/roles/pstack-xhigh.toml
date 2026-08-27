@@ -1,0 +1,4 @@
+# Matches spawn_subagent type grok-pstack:pstack-xhigh.
+description = "pstack judgment, review, and live-lane leaf. grok-4.6 xhigh."
+model = "grok-4.6"
+reasoning_effort = "xhigh"

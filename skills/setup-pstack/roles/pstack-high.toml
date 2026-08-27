@@ -1,0 +1,4 @@
+# Matches spawn_subagent type grok-pstack:pstack-high.
+description = "pstack mechanical panel and explorer leaf. grok-4.6 high."
+model = "grok-4.6"
+reasoning_effort = "high"

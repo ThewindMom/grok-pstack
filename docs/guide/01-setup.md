@@ -18,7 +18,7 @@ Run:
 /setup-pstack
 ```
 
-[`/setup-pstack`](../../skills/setup-pstack/SKILL.md) confirms `grok-4.6`, shows you each role (code delegates, judgment, the review panels), and asks what you want. Mechanical work is `high`. Judgment is `xhigh`. It never writes `grok-4.5`. Answer the questions. It writes `~/.grok/pstack.toml` or project `.grok/pstack.toml`, plus a short rule next to it. It also writes `scripts_root` and installs `~/.grok/bin` wrappers (`pstack-watch-pr`, `pstack-orch`, `pstack-worktree-audit`, `pstack-heartbeat`, `pstack-check-plan`) so playbooks can find the plugin scripts after install. It never writes Cursor rules.
+[`/setup-pstack`](../../skills/setup-pstack/SKILL.md) confirms `grok-4.6`, shows you each role (code delegates, judgment, the review panels), and asks what you want. Mechanical work is `high`. Judgment is `xhigh`. It never writes `grok-4.5`. Answer the questions. It writes `~/.grok/pstack.toml` or project `.grok/pstack.toml`, plus a short rule next to it. It also writes `scripts_root` and installs `~/.grok/bin` wrappers (`pstack-watch-pr`, `pstack-orch`, `pstack-worktree-audit`, `pstack-heartbeat`, `pstack-check-plan`) so playbooks can find the plugin scripts after install. It writes Grok roles under `~/.grok/roles/grok-pstack:*.toml` so each spawn type pins `reasoning_effort`. It never writes Cursor rules.
 
 You only override what you care about. A role with no key keeps the skill's default. To restore a default later, delete that key, or just run `/setup-pstack` again.
 

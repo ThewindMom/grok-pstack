@@ -48,7 +48,7 @@ In context, that's enough. [`/tdd`](../../skills/tdd/SKILL.md) writes the smalle
 
 ## Clean before you commit
 
-The [Opening a PR playbook](../../skills/poteto-mode/playbooks/opening-a-pr.md) runs `/deslop` on the diff before each commit and applies [`/unslop`](../../skills/unslop/SKILL.md) to the PR description and commit bodies. `/deslop` ships in pstack. If a session somehow lacks it, ask for the same outcome in plain words: remove narrating comments, unsupported guards, dead compatibility paths, and unrelated edits.
+The [Opening a PR playbook](../../skills/poteto-mode/playbooks/opening-a-pr.md) runs `/deslop` on the diff before each commit and writes titles as Conventional Commits. Descriptions use Why, Scope, Tradeoffs, Blast Radius, and Verification, then [`/unslop`](../../skills/unslop/SKILL.md). `/deslop` ships in pstack. If a session somehow lacks it, ask for the same outcome in plain words: remove narrating comments, unsupported guards, dead compatibility paths, and unrelated edits. Opening a PR does not start babysit.
 
 For prose, `/unslop` takes a target and any extra rules you have:
 

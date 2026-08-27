@@ -16,7 +16,7 @@ Call `spawn_subagent`. Required: `prompt`, `description`. Optional:
 | `resume_from` | completed child id, same type |
 | `cwd` | working directory. Not with `isolation: worktree` |
 
-`spawn_subagent` has no `effort` field. Effort is the agent type:
+`spawn_subagent` has no `effort` field. Effort is the agent type. `/setup-pstack` also writes Grok roles under `~/.grok/roles/grok-pstack:<name>.toml` with `reasoning_effort`, so the type matches a documented Grok pin rather than relying on agent YAML alone.
 
 | Type | Effort | Use |
 |---|---|---|

@@ -6,6 +6,24 @@ Invoked at the end of every other playbook.
 
 **Commits.** Commit liberally; rebase into small, ordered commits before opening PRs. Each commit is a future PR: landable, ordered to tell the story. Amend when the fix belongs in a just-made commit; new commit when separable.
 
-**PRs.** `/deslop` the diff before commit. A leaf may run `/deslop`; it does not spawn. `/no-comments` the diff before review, in the parent, because it must spawn Comment Sicko. Apply the **unslop** skill to the PR description and commit bodies. Small PRs, 5 narrow over 1 fat; stack follow-ups, branch off main only for genuinely independent work. For stacked PRs, use whatever stacking tool your team uses; the principle is small, ordered slices with the stack visible to reviewers. `gh pr view <number>` before referencing PR status. Rebase on `main` before substantial stack work. No `## Summary` / `## Test plan` boilerplate on small PRs; commit bodies don't restate the subject.
+**PRs.** Run `/deslop` over the diff before commit. A leaf may run `/deslop`; it does not spawn. Write every PR title, PR description, and commit body with `/technical-writing`, then apply `/unslop`. Apply every technical-writing layer except Diátaxis. Use one word for each action, keep articles, and avoid `-ing` when a plain verb works. `/no-comments` stays in the parent. A leaf does not spawn Comment Sicko.
 
-After opening, the parent runs the **Babysit** playbook. Push back when feedback drifts from intent. A leaf that opens a PR returns the URL and head SHA and stops. It does not babysit, does not run `/no-comments`, and does not spawn. `interrogate` and `/no-comments` stay in the parent. Return to the parent.
+**Titles.** Use Conventional Commits in the form `type(scope): subject`. Use `feat`, `fix`, `docs`, `refactor`, `test`, `chore`, or `perf` as the type. Use the changed area as the scope. Keep the subject short and imperative. Apply the same `/technical-writing` and `/unslop` pass as the body. Name a real symbol when one carries the change. For example, `fix(pstack): retarget opening-a-pr babysit trigger`. Do not add a trailing period.
+
+**Descriptions.** Use these sections in order. Drop a section when it is empty.
+
+- `## Why`. State the intent and why this approach fits.
+- `## Scope`. State facts from the diff. Name real symbols and paths. Name both sides of a rename or retarget. State what is in and out when the boundary matters.
+- `## Tradeoffs`. State real choices only. Skip this section when there are none.
+- `## Blast Radius`. State who and what the change touches. Explain why the change is safe or risky. If main is red without the fix, name the continuing cost.
+- `## Verification`. State how you ran each check and its rigor. Name the real path, such as the **drive** skill, a project `verify-*` skill, Playwright, a PTY, or the targeted tests. State the outcome of each check, not only the command name.
+
+After these sections, attach videos or screenshots when they prove a claim. Do not use `## Summary` or `## Test plan` boilerplate. A commit body does not restate its subject.
+
+**Size and stacks.** Prefer five narrow PRs to one large PR. Stack follow-ups with Graphite (`gt`) when it is on the machine. Otherwise keep the same ordered slices on git branches and make the stack visible to reviewers. Branch from main only for independent work. Rebase on `main` before substantial stack work.
+
+**Readiness.** Open every PR ready, never as a draft. Set `draft: false` on every `gh pr create`. If a PR still opens as a draft, run `gh pr ready <number>`. Run `gh pr view <number>` before you refer to PR status.
+
+**Babysit.** Opening a PR does not start a babysit. Post the URL and keep building. Finish the phase or stack first. Run a separate babysit pass only when the user asks for one after the whole stack exists. A babysit for each new PR stalls the build and spends checks on commits that later waves restart. Push back when feedback drifts from intent.
+
+A leaf that opens a PR returns the URL and head SHA and stops. It does not babysit, does not run `/no-comments`, and does not spawn. `interrogate` and `/no-comments` stay in the parent. Return to the parent.

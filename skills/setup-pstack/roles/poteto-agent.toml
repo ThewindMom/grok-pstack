@@ -1,0 +1,4 @@
+# Matches spawn_subagent type grok-pstack:poteto-agent.
+description = "pstack mechanical leaf. grok-4.6 high."
+model = "grok-4.6"
+reasoning_effort = "high"

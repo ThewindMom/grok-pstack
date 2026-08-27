@@ -13,8 +13,8 @@ Never write `~/.cursor/rules/`. Cursor rules are not loaded as pstack config.
 
 Ask once, prefer `ask_user_question`:
 
-- **User** (default): `~/.grok/pstack.toml` plus `~/.grok/rules/pstack.md`
-- **Project**: `.grok/pstack.toml` plus `.grok/rules/pstack.md`
+- **User** (default): `~/.grok/pstack.toml` plus `~/.grok/rules/pstack.md` plus `~/.grok/roles/grok-pstack:*.toml`
+- **Project**: `.grok/pstack.toml` plus `.grok/rules/pstack.md` plus `.grok/roles/grok-pstack:*.toml`
 
 Project wins when both exist. Re-runs overwrite the chosen files so setup stays idempotent.
 
@@ -59,13 +59,15 @@ Every real slug must be `grok-4.6`. `inherit-parent` and `auto` always pass. Ref
 
 Every real effort must be `high` or `xhigh`. Refuse `low`, `medium`, `default`, `max`, `none`, `minimal`.
 
-`spawn_subagent` takes `model`. It does not take `effort`. Pick the agent type from the poteto-mode skill `references/spawn.md`. Write effort into `pstack.toml` so the type mapping stays visible. Do not spawn `general-purpose` or `explore` for a pstack role.
+`spawn_subagent` takes `model`. It does not take `effort`. Pick the agent type from the poteto-mode skill `references/spawn.md`. Write effort into `pstack.toml` so the type mapping stays visible. Write matching Grok roles (`reasoning_effort`) so the type pins effort at spawn, not only in agent YAML. Do not spawn `general-purpose` or `explore` for a pstack role.
 
 ### 5. Write the files
 
 Resolve the installed plugin's scripts directory before writing. This skill lives at `skills/setup-pstack/`. The tools live at sibling `skills/poteto-mode/scripts/`. Use that absolute path when it contains `worktree-audit.sh`. Otherwise run `skills/poteto-mode/scripts/resolve-scripts.sh` from the plugin tree.
 
 Write that path as `scripts_root` at the top of `pstack.toml`. Then run `"$scripts_root/install-wrappers.sh"`. It writes `pstack-watch-pr`, `pstack-orch`, `pstack-worktree-audit`, `pstack-heartbeat`, `pstack-check-plan`, `pstack-resolve-scripts`, and `pstack-scripts` under `~/.grok/bin`. Tell the user to put `~/.grok/bin` on `PATH` if it is not already.
+
+This skill lives at `skills/setup-pstack/`. After the wrappers, run `"<this-skill-dir>/install-roles.sh" user` or `project` to match the destination chosen above. It writes `grok-pstack:poteto-agent.toml`, `grok-pstack:poteto-judge.toml`, `grok-pstack:pstack-high.toml`, `grok-pstack:pstack-xhigh.toml`, and `grok-pstack:comment-sicko.toml` into `~/.grok/roles/` or `.grok/roles/`. Each file sets `model = "grok-4.6"` and `reasoning_effort` to `high` or `xhigh`. Grok discovers those filenames as role names, which match the `spawn_subagent` types. Re-runs overwrite them.
 
 `pstack.toml`:
 
@@ -189,6 +191,7 @@ Read `~/.grok/pstack.toml` or `.grok/pstack.toml` before any `spawn_subagent` ca
 Use only `grok-4.6`. Spawn `grok-pstack:poteto-agent` or `grok-pstack:pstack-high` for mechanical work.
 Spawn `grok-pstack:poteto-judge` or `grok-pstack:pstack-xhigh` for judgment.
 Never `grok-4.5`. Never the built-in `explore` agent. The parent session owns every fan-out.
+Grok roles in `~/.grok/roles/grok-pstack:*.toml` pin `reasoning_effort` to match those types.
 Children do not spawn. See the poteto-mode skill `references/spawn.md`.
 Drive the real surface with the `drive` skill.
 Resolve harness tools through `scripts_root` or `~/.grok/bin` (`pstack-watch-pr`, `pstack-orch`, `pstack-worktree-audit`, `pstack-heartbeat`, `pstack-check-plan`). See the poteto-mode skill `references/scripts.md`.
@@ -196,7 +199,7 @@ Resolve harness tools through `scripts_root` or `~/.grok/bin` (`pstack-watch-pr`
 
 ### 6. Confirm
 
-Tell the user which files were written, the `scripts_root` value, which wrappers landed in `~/.grok/bin`, and that the mapping applies to new sessions. Re-running this skill updates them.
+Tell the user which files were written, the `scripts_root` value, which wrappers landed in `~/.grok/bin`, which Grok roles landed, and that the mapping applies to new sessions. Re-running this skill updates them.
 
 ### 7. Offer a verification skill
 

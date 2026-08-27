@@ -99,7 +99,7 @@ In the overview, name which pstack non-negotiables the implementer must apply, b
 - the **interrogate** skill for adversarial review on contested designs before shipping.
 - `/deslop` over each diff before commit. the **unslop** skill over any prose surface.
 - the **show-me-your-work** skill to keep a decision trail when the plan is large enough to need an auditable record.
-- the **Babysit** playbook after opening the PR.
+- the **Babysit** playbook when the user asks, after the stack exists. Opening a PR does not start babysit.
 
 ## 7. Hand back
 
