@@ -92,7 +92,7 @@ Read `references/spawn.md` before the first spawn. Read `references/scripts.md` 
 
 Only `grok-4.6`. Never `grok-4.5`. Multi-model panels are high vs xhigh agent types plus persona, not four vendors.
 
-You own every child's work. Review the diff and write your own summary. Prefer a fresh spawn with consolidated scope over `resume_from`. A second opinion is the other type (`pstack-high` vs `pstack-xhigh`) or a different persona. Agreement is high-signal.
+You own every child's work. Review the diff and write your own summary. Do not pass through what the child said. Directives decay across `resume_from`, so fire a fresh subagent with consolidated scope rather than trusting a "done" summary. A second opinion is the other type (`pstack-high` vs `pstack-xhigh`) or a different persona. Agreement is high-signal.
 
 ## Writing the reply
 

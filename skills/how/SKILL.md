@@ -127,7 +127,7 @@ For each critic:
 - `model`: `grok-4.6`
 - `capability_mode`: `read-only`
 
-Put the persona in the prompt. Grok has no four-vendor panel. Diversity is the agent type plus stance. Never `grok-4.5`.
+Put the persona in the prompt. Grok has no four-vendor panel. Diversity is the agent type plus stance. Never `grok-4.5`. These types are minima. When the architecture needs deeper analysis, spawn that critic as `grok-pstack:pstack-xhigh` even if the panel slot is high.
 
 Read `references/critic-prompt.md` for the prompt template. Each critic gets:
 1. The explanation from Step 1 (so they don't re-explore)

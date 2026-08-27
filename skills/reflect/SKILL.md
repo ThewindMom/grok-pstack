@@ -24,7 +24,7 @@ Skip when the conversation is trivial, off-topic, or already covered by an exist
 
 ### 1. Locate the active transcript
 
-The parent finds its own transcript before fanning out. Use the path the Grok session names. Common places: the current conversation, `~/.grok/sessions/`, project `.grok/transcripts/`. Do not glob `~/.cursor/projects/*/`. That crosses workspace boundaries and reads private chats from unrelated projects.
+The parent finds its own transcript before fanning out. Use the path the Grok session names. Common places: the current conversation, `~/.grok/sessions/`, project `.grok/transcripts/`. For each candidate, confirm it is this chat: match the opening user prompt of this conversation, not a sibling session. Do not glob `~/.cursor/projects/*/`. That crosses workspace boundaries and reads private chats from unrelated projects.
 
 If no path resolves, write a tight digest of the session and pass that instead.
 

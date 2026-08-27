@@ -6,7 +6,7 @@ Invoked at the end of every other playbook.
 
 **Commits.** Commit liberally; rebase into small, ordered commits before opening PRs. Each commit is a future PR: landable, ordered to tell the story. Amend when the fix belongs in a just-made commit; new commit when separable.
 
-**PRs.** Run `/deslop` over the diff before commit. A leaf may run `/deslop`; it does not spawn. Write every PR title, PR description, and commit body with `/technical-writing`, then apply `/unslop`. Apply every technical-writing layer except Diátaxis. Use one word for each action, keep articles, and avoid `-ing` when a plain verb works. `/no-comments` stays in the parent. A leaf does not spawn Comment Sicko.
+**PRs.** Run `/deslop` over the diff before commit. A leaf may run `/deslop`; it does not spawn. Write every PR title, PR description, and commit body with `/technical-writing`, then apply `/unslop`. Apply every technical-writing layer except Diátaxis. Use one word for each action, keep articles, and avoid `-ing` when a plain verb works. The parent runs `/no-comments` before review. A leaf does not spawn Comment Sicko.
 
 **Titles.** Use Conventional Commits in the form `type(scope): subject`. Use `feat`, `fix`, `docs`, `refactor`, `test`, `chore`, or `perf` as the type. Use the changed area as the scope. Keep the subject short and imperative. Apply the same `/technical-writing` and `/unslop` pass as the body. Name a real symbol when one carries the change. For example, `fix(pstack): retarget opening-a-pr babysit trigger`. Do not add a trailing period.
 
@@ -26,4 +26,4 @@ After these sections, attach videos or screenshots when they prove a claim. Do n
 
 **Babysit.** Opening a PR does not start a babysit. Post the URL and keep building. Finish the phase or stack first. Run a separate babysit pass only when the user asks for one after the whole stack exists. A babysit for each new PR stalls the build and spends checks on commits that later waves restart. Push back when feedback drifts from intent.
 
-A leaf that opens a PR returns the URL and head SHA and stops. It does not babysit, does not run `/no-comments`, and does not spawn. `interrogate` and `/no-comments` stay in the parent. Return to the parent.
+A leaf that opens a PR returns the URL and head SHA and stops. It does not babysit, does not run `/no-comments`, and does not spawn. Before review the parent runs `/no-comments`. The parent runs `interrogate` when the design is contested. Return to the parent.

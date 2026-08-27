@@ -203,4 +203,4 @@ Tell the user which files were written, the `scripts_root` value, which wrappers
 
 ### 7. Offer a verification skill
 
-If the project has no `verify-*` skill and no existing harness, offer once to run `/create-verification-skill`. On no, move on.
+Check whether the project has a way to drive the real app for proof, a `verify-*` skill or an existing harness. If it finds neither, offer once: want a project-local verification skill, so agents can drive the app the way a user does and prove changes work? On yes, invoke `/create-verification-skill`. On no, move on.
