@@ -24,7 +24,7 @@ FANOUT
 goal: <one sentence>
 workers:
 - label: <name>
-  type: pstack:poteto-agent | general-purpose | explore | pstack:comment-sicko
+  type: grok-pstack:poteto-agent | general-purpose | explore | grok-pstack:comment-sicko
   model: grok-4.6 | grok-4.5
   capability_mode: read-only | all
   isolation: none | worktree

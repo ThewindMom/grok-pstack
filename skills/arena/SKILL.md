@@ -32,7 +32,7 @@ The N candidates will receive the same prompt, so the prompt is the contract. Ge
 
 ## Phase B: Fan out
 
-Spawn all N children in one message with `background: true`, `subagent_type: pstack:poteto-agent` for code or `general-purpose` for sketches. Each gets the task, the path to the shared grounding, its own output path, and instructions to produce both the artifact and a short rationale. Put the persona in the prompt.
+Spawn all N children in one message with `background: true`, `subagent_type: grok-pstack:poteto-agent` for code or `general-purpose` for sketches. Each gets the task, the path to the shared grounding, its own output path, and instructions to produce both the artifact and a short rationale. Put the persona in the prompt.
 
 The rationale is mandatory. Without it, the parent cannot tell whether a candidate's structure is principled or accidental, which makes Phase E grafting unreliable. Each rationale names the alternatives the candidate considered and what it rejected.
 

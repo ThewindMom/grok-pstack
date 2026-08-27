@@ -9,15 +9,15 @@ if you want to go fast, go deep first. throughput without quality is not the goa
 ## install
 
 ```bash
-grok plugin install ThewindMom/pstack --trust
-grok plugin enable pstack
+grok plugin install ThewindMom/grok-pstack --trust
+grok plugin enable grok-pstack
 ```
 
 or from this checkout:
 
 ```bash
 grok plugin install "$(pwd)" --trust
-grok plugin enable pstack
+grok plugin enable grok-pstack
 ```
 
 then:
@@ -58,9 +58,9 @@ it stays on for the conversation until you opt out.
 
 **models.** `grok-4.6` (default, judgment) and `grok-4.5` (fast, mechanical). no claude. no gpt. no cursor slugs. multi-model panels in cursor pstack become multi-effort and multi-persona grok children. `/setup-pstack` writes `~/.grok/pstack.toml` or project `.grok/pstack.toml`. it never writes `~/.cursor/rules/`.
 
-**depth is 1.** a grok subagent cannot spawn subagents. cursor pstack playbooks that fanned out from a `poteto-agent` child will silently fail here if you leave them nested. the parent session running `/poteto-mode` owns every `spawn_subagent` call. `pstack:poteto-agent` is a leaf. if a leaf needs more workers, it returns a `FANOUT` block and stops.
+**depth is 1.** a grok subagent cannot spawn subagents. cursor pstack playbooks that fanned out from a `poteto-agent` child will silently fail here if you leave them nested. the parent session running `/poteto-mode` owns every `spawn_subagent` call. `grok-pstack:poteto-agent` is a leaf. if a leaf needs more workers, it returns a `FANOUT` block and stops.
 
-**spawn.** use `spawn_subagent`, not cursor `Task`. built-in types are `general-purpose`, `explore`, and `plan`. pstack adds `pstack:poteto-agent` and `pstack:comment-sicko`. grok qualifies plugin agents as `plugin-name:agent-name`.
+**spawn.** use `spawn_subagent`, not cursor `Task`. built-in types are `general-purpose`, `explore`, and `plan`. pstack adds `grok-pstack:poteto-agent` and `grok-pstack:comment-sicko`. grok qualifies plugin agents as `plugin-name:agent-name`.
 
 ## playbooks
 
@@ -126,8 +126,8 @@ the [guide](./docs/guide/README.md) walks a first real task.
 
 spawn from the parent with `spawn_subagent`:
 
-- [`pstack:poteto-agent`](./agents/poteto-agent.md). leaf worker. reads poteto-mode including the principles index. cannot spawn.
-- [`pstack:comment-sicko`](./agents/comment-sicko.md). comment reviewer. usually through `/no-comments`.
+- [`grok-pstack:poteto-agent`](./agents/poteto-agent.md). leaf worker. reads poteto-mode including the principles index. cannot spawn.
+- [`grok-pstack:comment-sicko`](./agents/comment-sicko.md). comment reviewer. usually through `/no-comments`.
 
 ## credit
 

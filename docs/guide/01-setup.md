@@ -5,7 +5,7 @@ In this page you install the plugin, pick which models pstack uses, and run your
 ## Install the plugin
 
 ```bash
-grok plugin install ThewindMom/pstack --trust
+grok plugin install ThewindMom/grok-pstack --trust
 ```
 
 Grok loads the skills, commands, and agents. `--trust` is required so hooks and skills actually activate.

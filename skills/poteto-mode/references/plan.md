@@ -24,7 +24,7 @@ Resolve what is in scope vs explicitly out, technical or platform constraints, p
 
 Delegate codebase exploration (the **guard-the-context-window** principle skill).
 
-- Prefer `subagent_type: "pstack:poteto-agent"`. `general-purpose` is the fallback. Never use the built-in `plan` subagent_type; it ignores this skill.
+- Prefer `subagent_type: "grok-pstack:poteto-agent"`. `general-purpose` is the fallback. Never use the built-in `plan` subagent_type; it ignores this skill.
 - Pass `model:` explicitly per the configured roles (defaults `grok-4.5` for code, `grok-4.6` for judgment).
 
 Each explorer returns file pointers, conventions, dependencies, test infrastructure, and entry points. No inlined dumps.

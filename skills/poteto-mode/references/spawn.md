@@ -8,7 +8,7 @@ Call `spawn_subagent`. Required: `prompt`, `description`. Optional:
 
 | Field | Values |
 |---|---|
-| `subagent_type` | `pstack:poteto-agent`, `pstack:comment-sicko`, `general-purpose`, `explore`, `plan` |
+| `subagent_type` | `grok-pstack:poteto-agent`, `grok-pstack:comment-sicko`, `general-purpose`, `explore`, `plan` |
 | `background` | `true` for parallel work |
 | `capability_mode` | `read-only`, `read-write`, `execute`, `all` |
 | `isolation` | `none` (shared tree) or `worktree` |
@@ -26,7 +26,7 @@ The parent running `/poteto-mode` (or the main session that invoked a workflow s
 
 Do not write playbooks that assume a child will spawn its own children. That is the Cursor pstack shape. It is wrong here.
 
-Grok registers this plugin's agents as `pstack:poteto-agent` and `pstack:comment-sicko`. Spawn those ids, not the bare filenames.
+Grok registers this plugin's agents as `grok-pstack:poteto-agent` and `grok-pstack:comment-sicko`. Spawn those ids, not the bare filenames.
 
 `/no-comments` must spawn Comment Sicko. The babysit loop stays in the parent. A leaf that opens a PR returns the URL and head SHA and stops. See `playbooks/opening-a-pr.md`.
 
@@ -36,12 +36,12 @@ Harness tools (`watch-pr`, `orch`, `worktree-audit`) live in the plugin tree. Re
 
 | Work | Type | Notes |
 |---|---|---|
-| Code, playbook slice, pstack style | `pstack:poteto-agent` | Leaf. Reads poteto-mode + principles. |
-| Comment review | `pstack:comment-sicko` | Leaf. Report only. |
+| Code, playbook slice, pstack style | `grok-pstack:poteto-agent` | Leaf. Reads poteto-mode + principles. |
+| Comment review | `grok-pstack:comment-sicko` | Leaf. Report only. |
 | How / why / arena / swarm / interrogate / reflect workers | `general-purpose` or `explore` | Parent sets the persona in the prompt. |
 | Read-only codebase hunt | `explore` | No file edits. |
 
-Routed workflow skills set their own type. Do not override those to `pstack:poteto-agent`.
+Routed workflow skills set their own type. Do not override those to `grok-pstack:poteto-agent`.
 
 ## Models and panels
 

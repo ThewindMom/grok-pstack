@@ -29,7 +29,7 @@ Open a todolist with one entry per phase before launching anything.
 
 ## Phase B: Fan out
 
-Spawn all N workers in one message with `subagent_type: general-purpose` (or `pstack:poteto-agent` when the slice is pstack-style implementation), `background: true`, and the configured model. Use `isolation: none` when the worker only reads this machine. Use `worktree` when it writes.
+Spawn all N workers in one message with `subagent_type: general-purpose` (or `grok-pstack:poteto-agent` when the slice is pstack-style implementation), `background: true`, and the configured model. Use `isolation: none` when the worker only reads this machine. Use `worktree` when it writes.
 
 There is no Cursor cloud environment and no `cloud_base_branch`. If a worker must start from a non-default pushed branch, put the ref in the brief and have it check that branch out, or set `cwd` to an existing worktree.
 
